@@ -1,0 +1,735 @@
+<title>Sprint 28 dias — HANA Cloud · Datasphere · SAC</title>
+
+<style>
+:root{
+  --bg:#D5E3E0; --surface:#FBFCFC; --surface-2:#EDF3F2; --surface-3:#DFE9E7;
+  --ink:#0A1716; --ink-soft:#2E403D; --muted:#5D6E6C; --line:#C9D4D2;
+  --w1:#0D4A45; --w2:#17786D; --w3:#3C9C8E; --w4:#7BC0B4;
+  --t1:#A6CEC7; --t2:#BADFD5; --t3:#CDEBE2; --t4:#E0F4EE;
+  --tint:#E4F0ED;
+  --copper:#B3541E; --copper-2:#D97A3E; --copper-dim:#E5D3C6;
+  --shadow:0 1px 2px rgba(10,23,22,.05), 0 12px 32px -18px rgba(10,23,22,.28);
+  --display:"Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,sans-serif;
+  --body:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"Cascadia Mono",Consolas,ui-monospace,"SF Mono",Menlo,monospace;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#080E0D; --surface:#101917; --surface-2:#16211F; --surface-3:#1E2B29;
+    --ink:#E8EFED; --ink-soft:#C3D1CE; --muted:#8CA09D; --line:#22302E;
+    --w1:#2C8F84; --w2:#3FAE9F; --w3:#63C6B8; --w4:#95DACE;
+  --t1:#123A34; --t2:#17483F; --t3:#1D564B; --t4:#236457;
+  --tint:#16302B;
+    --copper:#E08A4E; --copper-2:#F0A76F; --copper-dim:#3B2A1D;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 32px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#080E0D; --surface:#101917; --surface-2:#16211F; --surface-3:#1E2B29;
+  --ink:#E8EFED; --ink-soft:#C3D1CE; --muted:#8CA09D; --line:#22302E;
+  --w1:#2C8F84; --w2:#3FAE9F; --w3:#63C6B8; --w4:#95DACE;
+  --t1:#123A34; --t2:#17483F; --t3:#1D564B; --t4:#236457;
+  --tint:#16302B;
+  --copper:#E08A4E; --copper-2:#F0A76F; --copper-dim:#3B2A1D;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 32px -18px rgba(0,0,0,.8);
+}
+:root[data-theme="light"]{
+  --bg:#D5E3E0; --surface:#FBFCFC; --surface-2:#EDF3F2; --surface-3:#DFE9E7;
+  --ink:#0A1716; --ink-soft:#2E403D; --muted:#5D6E6C; --line:#C9D4D2;
+  --w1:#0D4A45; --w2:#17786D; --w3:#3C9C8E; --w4:#7BC0B4;
+  --t1:#A6CEC7; --t2:#BADFD5; --t3:#CDEBE2; --t4:#E0F4EE;
+  --tint:#E4F0ED;
+  --copper:#B3541E; --copper-2:#D97A3E; --copper-dim:#E5D3C6;
+  --shadow:0 1px 2px rgba(10,23,22,.05), 0 12px 32px -18px rgba(10,23,22,.28);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--body); font-size:16px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1000px; margin:0 auto; padding:28px 18px 90px;
+  display:flex; flex-direction:column; gap:26px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--copper); outline-offset:3px; border-radius:5px}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none !important; animation:none !important}
+}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative; overflow:hidden; border-radius:14px;
+  background:linear-gradient(148deg,#0A3A36 0%,#0E5750 46%,#157167 100%);
+  border:1px solid rgba(255,255,255,.09); color:#E9F5F2;
+  box-shadow:var(--shadow); padding:32px 30px;
+  display:flex; flex-direction:column; gap:18px;
+}
+.hero::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(105% 80% at 86% -6%, rgba(224,138,78,.30), transparent 58%);
+}
+/* o hero compromete-se com um mundo escuro nos dois temas */
+.hero .eyebrow{color:rgba(233,245,242,.62)}
+.hero h1{color:#fff}
+.hero h1 em{color:#8FD8CB}
+.hero .count b{color:#F0A76F}
+.hero .count span{color:rgba(233,245,242,.6)}
+.hero .thesis{color:rgba(233,245,242,.92); border-left-color:#E08A4E}
+.hero .facts{color:rgba(233,245,242,.62)}
+.hero .facts b{color:#F0A76F}
+.hero>*{position:relative; z-index:1}
+.eyebrow{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--muted);
+}
+.hero-main{display:flex; flex-wrap:wrap; gap:24px; align-items:flex-end}
+.count{display:flex; flex-direction:column; line-height:.82}
+.count b{
+  font-family:var(--display); font-size:clamp(72px,15vw,124px); font-weight:700;
+  letter-spacing:-.055em; color:var(--copper); font-variant-numeric:tabular-nums;
+}
+.count span{
+  font-family:var(--mono); font-size:12px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--muted); padding-left:5px; padding-top:9px;
+}
+h1{
+  font-family:var(--display); font-weight:700; font-size:clamp(21px,3.1vw,31px);
+  line-height:1.14; letter-spacing:-.022em; margin:0; flex:1 1 260px;
+  text-wrap:balance; max-width:19ch;
+}
+h1 em{font-style:normal; color:var(--w2)}
+.thesis{
+  font-family:var(--serif); font-style:italic; font-size:clamp(15px,2vw,17.5px);
+  color:var(--ink-soft); margin:0; padding-left:15px;
+  border-left:2px solid var(--copper); max-width:62ch;
+}
+.facts{
+  display:flex; flex-wrap:wrap; gap:7px 20px; font-family:var(--mono);
+  font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums;
+}
+.facts b{color:var(--ink-soft); font-weight:600}
+
+/* ============ CALENDAR ============ */
+.cal-shell{display:flex; flex-direction:column; gap:13px}
+.cal-head{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
+.cal-head h2{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--muted); margin:0; font-weight:400;
+}
+.legend{display:flex; gap:13px; margin-left:auto; flex-wrap:wrap;
+  font-family:var(--mono); font-size:10px; color:var(--muted);
+  letter-spacing:.05em; text-transform:uppercase}
+.legend i{display:inline-block; width:9px; height:9px; border-radius:2.5px;
+  margin-right:5px; vertical-align:-1px}
+.cal{
+  display:grid; grid-template-columns:repeat(7,1fr); gap:5px;
+}
+@media(max-width:560px){.cal{grid-template-columns:repeat(4,1fr)}}
+.cell{
+  position:relative; aspect-ratio:1/.82; border-radius:7px; cursor:pointer;
+  border:1px solid var(--line); background:var(--surface);
+  display:flex; flex-direction:column; justify-content:space-between;
+  padding:7px 8px; font-family:var(--mono); text-align:left;
+  transition:transform .16s ease, border-color .16s ease, background .2s ease;
+}
+.cell:hover{transform:translateY(-2px); border-color:var(--copper)}
+.cell .dn{font-size:14px; font-weight:700; color:var(--ink);
+  font-variant-numeric:tabular-nums; letter-spacing:-.02em}
+.cell .wk{font-size:8.5px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--muted); line-height:1.25}
+.cell[data-w="1"]{border-top:3px solid var(--w1); background:var(--t1)}
+.cell[data-w="2"]{border-top:3px solid var(--w2); background:var(--t2)}
+.cell[data-w="3"]{border-top:3px solid var(--w3); background:var(--t3)}
+.cell[data-w="4"]{border-top:3px solid var(--w4); background:var(--t4)}
+.cell.done{background:var(--copper); border-color:var(--copper)}
+.cell.done .dn,.cell.done .wk{color:#fff}
+.cell.today{box-shadow:0 0 0 2px var(--copper), 0 0 0 5px var(--copper-dim)}
+.cell.today .dn::after{content:" ●"; font-size:8px; color:var(--copper); vertical-align:2px}
+.cell.done.today .dn::after{color:#fff}
+
+/* ============ CONSOLE ============ */
+.console{
+  background:var(--tint);
+  border:1px solid color-mix(in oklab,var(--w2) 30%, var(--line)); border-radius:12px;
+  box-shadow:var(--shadow); padding:17px; display:flex; flex-direction:column; gap:15px;
+}
+.crow{display:flex; flex-wrap:wrap; gap:14px; align-items:flex-end}
+.field{display:flex; flex-direction:column; gap:5px}
+.field label{font-family:var(--mono); font-size:10px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted)}
+.field input[type="date"]{
+  font-family:var(--mono); font-size:13px; color:var(--ink);
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:6px; padding:7px 9px;
+}
+.btn{
+  font-family:var(--mono); font-size:11px; letter-spacing:.07em;
+  text-transform:uppercase; color:var(--ink-soft); background:var(--surface-2);
+  border:1px solid var(--line); border-radius:6px; padding:8px 12px; cursor:pointer;
+  transition:border-color .15s ease, background .15s ease, color .15s ease;
+}
+.btn:hover{border-color:var(--w2); color:var(--ink)}
+.btn.on{background:var(--copper); border-color:var(--copper); color:#fff}
+.today-chip{
+  margin-left:auto; text-align:right; font-family:var(--mono);
+  font-size:11.5px; color:var(--muted); line-height:1.45;
+}
+.today-chip strong{display:block; font-size:19px; color:var(--copper); font-weight:700}
+.total{display:flex; flex-direction:column; gap:7px}
+.total-head{display:flex; justify-content:space-between; align-items:baseline;
+  font-family:var(--mono); font-size:11.5px; color:var(--muted)}
+.total-head b{font-size:14px; color:var(--ink)}
+.bar{height:7px; background:var(--surface-3); border-radius:99px; overflow:hidden}
+.bar>i{display:block; height:100%; width:100%; background:var(--copper);
+  transform:scaleX(0); transform-origin:left center;
+  transition:transform .5s cubic-bezier(.4,0,.2,1)}
+
+/* ============ WEEK ============ */
+.week{display:flex; flex-direction:column; gap:9px; scroll-margin-top:14px}
+.week-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:5px 13px;
+  padding:12px 15px; border-radius:9px 9px 4px 4px;
+  background:var(--wt); border-bottom:3px solid var(--wc)}
+.week.k1{--wc:var(--w1); --wt:var(--t1)} .week.k2{--wc:var(--w2); --wt:var(--t2)}
+.week.k3{--wc:var(--w3); --wt:var(--t3)} .week.k4{--wc:var(--w4); --wt:var(--t4)}
+.week-n{font-family:var(--mono); font-size:11px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--wc)}
+.week-t{font-family:var(--display); font-size:clamp(19px,2.6vw,25px); font-weight:700;
+  letter-spacing:-.018em; margin:0; flex:1 1 auto; text-wrap:balance}
+.week-m{font-family:var(--mono); font-size:11.5px; color:var(--muted);
+  font-variant-numeric:tabular-nums}
+.week-why{margin:0 0 4px; color:var(--ink-soft); font-size:14.5px; max-width:70ch}
+.week-why strong{color:var(--ink)}
+
+/* ============ DAY ============ */
+.day{
+  background:color-mix(in oklab,var(--wt) 55%, var(--surface));
+  border:1px solid color-mix(in oklab,var(--wc) 30%, var(--line));
+  border-radius:10px; overflow:hidden;
+  transition:border-color .18s ease, background .18s ease;
+}
+.day.open{border-color:var(--wc); background:var(--surface)}
+.day-btn:hover{background:var(--wt)}
+.day.is-today{box-shadow:0 0 0 2px var(--copper-dim)}
+.day-btn{
+  width:100%; display:flex; align-items:center; gap:13px; padding:13px 15px;
+  background:none; border:none; cursor:pointer; text-align:left; color:inherit;
+  font-family:inherit;
+}
+.day-btn:hover{background:var(--surface-2)}
+.chk{
+  flex:0 0 auto; width:19px; height:19px; border-radius:5px; cursor:pointer;
+  border:1.5px solid var(--line); background:var(--surface-2);
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s ease, border-color .15s ease;
+}
+.chk:hover{border-color:var(--copper)}
+.chk[aria-pressed="true"]{background:var(--copper); border-color:var(--copper)}
+.chk[aria-pressed="true"]::after{
+  content:""; width:4.5px; height:9px; margin-bottom:2px;
+  border:solid #fff; border-width:0 2px 2px 0; transform:rotate(43deg);
+}
+.day-n{
+  font-family:var(--mono); font-size:11px; font-weight:700; color:var(--wc);
+  letter-spacing:.06em; flex:0 0 auto; width:38px; font-variant-numeric:tabular-nums;
+}
+.day-t{flex:1 1 auto; font-size:15px; font-weight:600; letter-spacing:-.005em;
+  line-height:1.35; min-width:0}
+.day.done .day-t{text-decoration:line-through; opacity:.5}
+.day-h{font-family:var(--mono); font-size:11px; color:var(--muted); flex:0 0 auto;
+  font-variant-numeric:tabular-nums}
+.caret{flex:0 0 auto; width:11px; height:11px; border-right:1.5px solid var(--muted);
+  border-bottom:1.5px solid var(--muted); transform:rotate(45deg) translate(-2px,-2px);
+  transition:transform .2s ease}
+.day.open .caret{transform:rotate(-135deg) translate(-3px,-3px)}
+.day-body{display:none; padding:0 15px 15px 66px; flex-direction:column; gap:11px}
+.day.open .day-body{display:flex}
+@media(max-width:560px){.day-body{padding-left:15px}}
+.goal{margin:0; font-size:14px; color:var(--ink-soft); max-width:68ch}
+.goal strong{color:var(--ink)}
+
+/* ============ LINKS ============ */
+.links{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px}
+.links li{display:flex; align-items:flex-start; gap:10px; padding:7px 9px;
+  border-radius:6px; transition:background .15s ease}
+.links li:hover{background:var(--surface-2)}
+.k{
+  flex:0 0 auto; margin-top:2px; width:20px; height:20px; border-radius:5px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--mono); font-size:9px; font-weight:700; letter-spacing:0;
+  border:1px solid var(--line); color:var(--muted); background:var(--surface-2);
+}
+.k.video{border-color:var(--copper); color:var(--copper);
+  background:color-mix(in oklab,var(--copper) 16%, var(--surface))}
+.k.lab{border-color:var(--w2); color:var(--w2);
+  background:color-mix(in oklab,var(--w2) 16%, var(--surface))}
+.k.course{border-color:var(--w1); color:var(--w1);
+  background:color-mix(in oklab,var(--w1) 14%, var(--surface))}
+.lk{display:flex; flex-direction:column; gap:1px; min-width:0}
+.lk a,.lk span.nolink{font-size:14px; line-height:1.4; font-weight:500}
+.lk a:hover{color:var(--copper)}
+.lk small{font-size:12px; color:var(--muted); line-height:1.4}
+
+.out{
+  background:color-mix(in oklab,var(--copper) 14%, var(--surface));
+  border:1px solid color-mix(in oklab,var(--copper) 38%, transparent);
+  border-radius:9px; padding:12px 15px; font-size:13.5px; color:var(--ink-soft);
+}
+.out b{font-family:var(--mono); font-size:10px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--copper); display:block; margin-bottom:2px}
+
+/* ============ TABLE / WARN ============ */
+.panel{
+  background:var(--tint);
+  border:1px solid color-mix(in oklab,var(--w2) 30%, var(--line));
+  border-radius:12px;
+  box-shadow:var(--shadow); padding:22px; display:flex; flex-direction:column; gap:13px;
+}
+.panel.flag{
+  border-color:var(--copper);
+  background:color-mix(in oklab, var(--copper) 7%, var(--surface));
+}
+.panel.flag h2{color:var(--copper)}
+.panel h2{font-family:var(--display); font-size:19px; margin:0; letter-spacing:-.015em}
+.panel p{margin:0; font-size:14px; color:var(--ink-soft); max-width:70ch}
+.panel code{font-family:var(--mono); font-size:12.5px; background:var(--surface-2);
+  padding:1.5px 5px; border-radius:4px; color:var(--copper)}
+.conf{font-family:var(--mono); font-size:9.5px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--muted)}
+.tbl-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:8px}
+table{border-collapse:collapse; width:100%; font-size:13.5px; min-width:420px}
+th,td{padding:8px 13px; text-align:left; border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:none}
+th{font-family:var(--mono); font-size:10px; letter-spacing:.11em;
+  text-transform:uppercase; color:#fff; background:var(--w2)}
+tbody tr:nth-child(odd){background:color-mix(in oklab,var(--w2) 7%, transparent)}
+td:first-child{color:var(--muted)}
+footer{font-size:12.5px; color:var(--muted); text-align:center; line-height:1.75}
+footer code{font-family:var(--mono)}
+.hide{display:none !important}
+noscript{display:block; padding:16px; background:var(--surface);
+  border:1px solid var(--copper); border-radius:10px; font-size:14px}
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Vida SAP · sprint de reposicionamento</div>
+    <div class="hero-main">
+      <div class="count"><b>28</b><span>dias</span></div>
+      <h1>HANA Cloud, <em>Datasphere</em> e o trunfo BPC</h1>
+    </div>
+    <p class="thesis">Em 28 dias não se aprende tudo — produz-se a prova. Cada semana termina num artefato que muda uma linha do CV.</p>
+    <div class="facts">
+      <span><b>2–3h</b>/dia</span>
+      <span>~<b>70h</b> no total</span>
+      <span><b>4</b> semanas · <b>4</b> artefatos</span>
+      <span>ECC sem manutenção em <b>2027</b></span>
+    </div>
+  </header>
+
+  <noscript>Este portal precisa de JavaScript para marcar progresso e abrir os dias. O conteúdo e os links estão todos no ficheiro <code>Estudos/TRILHA.md</code>.</noscript>
+
+  <section class="console" aria-label="Controlos">
+    <div class="crow">
+      <div class="field">
+        <label for="start">Dia 1 do sprint</label>
+        <input type="date" id="start">
+      </div>
+      <button class="btn" id="fToday" type="button">Ir para hoje</button>
+      <button class="btn" id="fPend" type="button" aria-pressed="false">Só pendentes</button>
+      <button class="btn" id="fReset" type="button">Zerar</button>
+      <div class="today-chip" id="chip"></div>
+    </div>
+    <div class="total">
+      <div class="total-head"><span>Progresso do sprint</span>
+        <span><b id="pct">0%</b> <span id="frac"></span></span></div>
+      <div class="bar"><i id="fill"></i></div>
+    </div>
+  </section>
+
+  <section class="cal-shell" aria-label="Calendário do sprint">
+    <div class="cal-head">
+      <h2>Os 28 dias</h2>
+      <div class="legend">
+        <span><i style="background:var(--w1)"></i>S1 HANA</span>
+        <span><i style="background:var(--w2)"></i>S2 Datasphere</span>
+        <span><i style="background:var(--w3)"></i>S3 BW Bridge</span>
+        <span><i style="background:var(--w4)"></i>S4 Prova</span>
+      </div>
+    </div>
+    <div class="cal" id="cal"></div>
+  </section>
+
+  <main id="weeks"></main>
+
+  <section class="panel">
+    <h2>Mapa de tradução — o que já sabe vira o que precisa saber</h2>
+    <p>Datasphere não é ferramenta nova para quem vem de BW: é BW/4HANA re-embalado sobre HANA Cloud. <strong>BW Bridge existe literalmente para quem vem de onde você vem.</strong> Guarde esta tabela aberta durante as semanas 2 e 3.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>BW / BW-4HANA</th><th>Datasphere</th></tr></thead>
+        <tbody>
+          <tr><td>InfoObject</td><td>Dimension (Business Entity)</td></tr>
+          <tr><td>ADSO</td><td>Local Table / Fact</td></tr>
+          <tr><td>CompositeProvider</td><td>Analytic Model</td></tr>
+          <tr><td>Transformation + DTP</td><td>Data Flow / Replication Flow</td></tr>
+          <tr><td>Open ODS View</td><td>Remote Table (federação)</td></tr>
+          <tr><td>Analysis Authorization</td><td>Data Access Control</td></tr>
+          <tr><td>InfoArea</td><td>Space</td></tr>
+          <tr><td>BEx Query</td><td>Analytic Model + story no SAC</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel flag">
+    <h2>Certificação não entra neste mês — e há um erro no seu CV</h2>
+    <p>Em 28 dias não dá para estudar <em>e</em> certificar. O sprint entrega <strong>laboratório e artigo</strong>, que é o que preenche o buraco de Datasphere. Certificação fica para depois — mas há uma correção de CV a fazer já:</p>
+    <p><span class="conf">confiança média-alta ·</span> <code>C_SACP_2321</code> e <code>C_SACS_2321</code> — <b>provavelmente obsoletos</b>. Consolidados num único <code>C_SAC</code> (release <code>C_SAC_2501</code>), que já traz Planning como 21–30% da prova. <b>Os dois estão no seu CV.</b></p>
+    <p><span class="conf">confiança alta ·</span> Datasphere <b>não tem certificação própria</b> — cai no Data Fabric (<code>C_BW4H</code>), valendo ~10–20% do exame. Reforça a decisão: o laboratório é que prova.</p>
+    <p><span class="conf">confiança baixa ·</span> HANA Cloud: existem <code>C_HCMOD_05</code> e <code>C_HAMOD</code>; há indício de que o segundo substitui o primeiro. Fontes eram sites de simulado — confirmar na origem.</p>
+    <p>Fonte autoritativa: <a href="https://learning.sap.com/certifications" target="_blank" rel="noopener"><b>learning.sap.com/certifications</b></a>. Está no dia 28.</p>
+  </section>
+
+  <footer>
+    Progresso guardado só neste browser, nesta máquina. Nada sai daqui.<br>
+    Sprint de reposicionamento SAP · HANA Cloud → Datasphere → SAC
+  </footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+var YT="https://www.youtube.com/results?search_query=";
+function yt(q){ return YT+encodeURIComponent(q); }
+
+var WEEKS=[
+ {k:1,n:"Semana 1",t:"HANA Cloud — ambiente no ar e o delta",m:"dias 1–7 · ~17h",
+  why:"Você já sabe HANA. O que mudou é a embalagem, e é a embalagem que as vagas pedem. <strong>O Studio saiu</strong>; entraram HANA Cloud Central, Database Explorer e Business Application Studio. Schemas viraram HDI containers. E dimensionar deixou de ser hardware para ser <strong>custo</strong>. Não estude o modelo de dados — estude só o delta.",
+  out:"Instância HANA Cloud viva + notas do delta on-prem → cloud. Matéria-prima do artigo final."},
+ {k:2,n:"Semana 2",t:"Datasphere — do zero ao fluxo ponta a ponta",m:"dias 8–14 · ~17h",
+  why:"A aposta. Aqui você constrói o primeiro fluxo completo: fonte → view → analytic model → story. Não é para ficar bonito, é para <strong>existir</strong> e você saber onde cada peça encaixa.",
+  out:"Um fluxo ponta a ponta funcionando, do conector à story. Print e notas de cada etapa."},
+ {k:3,n:"Semana 3",t:"BW Bridge — a vantagem injusta",m:"dias 15–21 · ~17h",
+  why:"A semana que ninguém sem passado de BW consegue fazer bem. BW Bridge foi desenhado para migrar quem tem 20 anos de BW — <strong>você é o público-alvo do produto</strong>. Aqui também se mede federação vs replicação, que é a pergunta de arquitetura que cai em entrevista.",
+  out:"BW Bridge com objeto BW real + comparação federação vs replicação com número, não opinião."},
+ {k:4,n:"Semana 4",t:"Converter em prova — cenário sujo, artigo e CV",m:"dias 22–28 · ~19h",
+  why:"Estudo que não vira prova pública não muda o seu preço. Esta semana pega um cenário BW <strong>com as sujeiras reais</strong>, refaz em Datasphere, documenta onde quebrou — e publica em inglês. É isto que remove o rótulo provisório do bloco Datasphere do seu CV.",
+  out:"Artigo publicado em inglês + CV corrigido. Fim do ovo e da galinha."}
+];
+
+var DAYS=[
+/* ---------------- SEMANA 1 ---------------- */
+{d:1,w:1,h:"2,5h",t:"Conta BTP trial e primeira instância no ar",
+ g:"Objetivo único: <strong>ter uma base HANA Cloud a correr hoje</strong>. Nada de teoria. Se sobrar tempo, explore o cockpit à toa.",
+ l:[{k:"lab",t:"Get an Account on SAP BTP Trial",u:"https://developers.sap.com/tutorials/hcp-create-trial-account.html",n:"90 dias, gratuito. Comece por aqui."},
+    {k:"lab",t:"HANA Cloud free tier em conta trial ou produtiva",u:"https://developers.sap.com/tutorials/hana-cloud-mission-trial-1.html",n:"Como ter instância sem pagar"},
+    {k:"lab",t:"Set Up Your SAP HANA Cloud Database",u:"https://developers.sap.com/group.hana-cloud-get-started-1-trial.html",n:"Grupo de tutoriais guiados, do zero à base no ar"},
+    {k:"video",t:"Developer Tutorial: Help Thomas Get Started with SAP HANA Cloud",u:"https://www.youtube.com/watch?v=ztDOYsNB204",n:"Visão geral em vídeo antes de meter a mão"}]},
+{d:2,w:1,h:"2,5h",t:"As ferramentas que substituíram o HANA Studio",
+ g:"HANA Cloud Central, SAP HANA Cockpit e Database Explorer. <strong>É aqui que mora a maior parte do seu desconforto</strong> — resolva já.",
+ l:[{k:"course",t:"Provisioning and Administering Databases in SAP HANA Cloud",u:"https://learning.sap.com/courses/provisioning-and-administering-databases-in-sap-hana-cloud",n:"16h15 · 9 unidades — faça as unidades 1–3 hoje"},
+    {k:"video",t:"SAP HANA Academy — canal",u:"https://www.youtube.com/channel/UCRhV_0Jlwgz_v3jmAuhHYZg",n:"2.500+ vídeos. Série de HANA Cloud do Philip Mugglestone"},
+    {k:"video",t:"Getting Started with SAP HANA Cloud — índice dos vídeos",u:"https://community.sap.com/t5/technology-blog-posts-by-sap/getting-started-with-sap-hana-cloud-video-tutorials/ba-p/13443239",n:"Mapa da série, para não se perder no canal"},
+    {k:"video",t:"Busca: HANA Cloud Central tutorial",u:yt("SAP HANA Cloud Central tutorial administration"),n:"Se precisar de outro ângulo"}]},
+{d:3,w:1,h:"2,5h",t:"Provisionamento, sizing e elastic compute",
+ g:"Como se dimensiona hoje. <strong>Elastic compute nodes</strong> não existiam no seu mundo on-premise — é diferencial de conversa técnica.",
+ l:[{k:"course",t:"Provisioning and Administering — unidades 4–6",u:"https://learning.sap.com/courses/provisioning-and-administering-databases-in-sap-hana-cloud",n:"Administração, cockpit, operações"},
+    {k:"video",t:"Busca: HANA Cloud elastic compute nodes",u:yt("SAP HANA Cloud elastic compute node"),n:""},
+    {k:"lab",t:"Repo de código da SAP HANA Academy",u:"https://github.com/saphanaacademy/SAPHANACloud",n:"Scripts prontos para acompanhar os vídeos"}]},
+{d:4,w:1,h:"2,5h",t:"Custo: hibernar, redimensionar, medir",
+ g:"<strong>O dia mais valioso da semana 1.</strong> Pare a instância, mude o tamanho, veja o que acontece à fatura. É a pergunta de arquitetura que quem só fez curso não sabe responder — e você vai poder responder com número.",
+ l:[{k:"lab",t:"Laboratório: ciclo completo de custo",u:"",n:"Hibernar → arrancar → redimensionar → anotar tempos e limites. Registe tudo; isto vira parágrafo de artigo."},
+    {k:"course",t:"Provisioning and Administering — unidades 7–9",u:"https://learning.sap.com/courses/provisioning-and-administering-databases-in-sap-hana-cloud",n:"Utilizadores, segurança, admin assistida por IA"},
+    {k:"video",t:"Busca: HANA Cloud cost optimization sizing",u:yt("SAP HANA Cloud cost optimization sizing hibernate"),n:""}]},
+{d:5,w:1,h:"2,5h",t:"Modelação hoje: calculation views no Cloud",
+ g:"Confirme o que continua igual e o que mudou de peso. Calculation views continuam — <strong>mas SQL e table functions ganharam terreno</strong>.",
+ l:[{k:"course",t:"SAP HANA Cloud — Modeling (certification path)",u:"https://help.sap.com/learning-journeys/dc078cd720724dcc9dc337697acf0fdc",n:"Junta migração, administração e modelação"},
+    {k:"lab",t:"Exercícios oficiais de modelação (SAP-samples)",u:"https://github.com/SAP-samples/hana-cloud-modeling-learning-journey",n:"Projeto e ficheiros dos exercícios — faça, não leia"},
+    {k:"video",t:"Busca: HANA Cloud calculation view tutorial",u:yt("SAP HANA Cloud calculation view modeling tutorial"),n:""}]},
+{d:6,w:1,h:"2,5h",t:"SQLScript, table functions e CDS",
+ g:"Terminar os exercícios de modelação. O objetivo não é dominar — é <strong>reconhecer</strong>, para não travar na semana 2.",
+ l:[{k:"lab",t:"Exercícios de modelação — concluir",u:"https://github.com/SAP-samples/hana-cloud-modeling-learning-journey",n:""},
+    {k:"course",t:"Hub SAP HANA e SAP HANA Cloud",u:"https://learning.sap.com/products/hana",n:"Índice, caso queira aprofundar algum ponto específico"},
+    {k:"video",t:"Busca: HANA Cloud SQLScript table function",u:yt("SAP HANA Cloud SQLScript table function tutorial"),n:""}]},
+{d:7,w:1,h:"2h",t:"Como os dados entram — e fechar as notas do delta",
+ g:"Ponte para Datasphere. Depois, <strong>escreva as notas do delta on-prem → cloud</strong> enquanto está fresco. Meia página basta; é o esqueleto do primeiro artigo.",
+ l:[{k:"course",t:"Provisioning Data to SAP HANA Cloud",u:"https://learning.sap.com/courses/provisioning-data-to-sap-hana-cloud",n:"Como os dados chegam à base"},
+    {k:"lab",t:"Escrever: 10 diferenças on-prem → cloud",u:"",n:"O que mudou, o que enganou, o que surpreendeu. Em inglês, já."}]},
+
+/* ---------------- SEMANA 2 ---------------- */
+{d:8,w:2,h:"2,5h",t:"Trial de Datasphere no ar + Spaces",
+ g:"Tenant a correr e o conceito de <strong>Space</strong> entendido. Space é o seu InfoArea com governança e quota — pense assim.",
+ l:[{k:"lab",t:"SAP Developer Trials and Downloads",u:"https://www.sap.com/products/try-sap/trials-downloads.html",n:"Página-mãe dos trials, incluindo Datasphere"},
+    {k:"lab",t:"SAP BTP — Free Trial",u:"https://www.sap.com/products/technology-platform/trial.html",n:"Se ainda não fez na semana 1"},
+    {k:"course",t:"Getting Started with SAP Datasphere",u:"https://pages.community.sap.com/topics/datasphere/getting-started",n:"Hub oficial de arranque"},
+    {k:"video",t:"SAP Datasphere Training — End-to-End Workshop",u:"https://www.youtube.com/watch?v=_uV2xGsV_RM",n:"Workshop longo; use como trilha paralela na semana"}]},
+{d:9,w:2,h:"2,5h",t:"Connections e Remote Tables (federação)",
+ g:"Ligar uma fonte e ler sem replicar. <strong>Remote Table é o seu Open ODS View</strong> — a analogia segura o conceito inteiro.",
+ l:[{k:"course",t:"Learning Journey: SAP Datasphere",u:"https://help.sap.com/learning-journeys/c4fcae2e2b7645109ab3315e8a7a6b10",n:"Trilha oficial completa — a espinha das semanas 2 e 3"},
+    {k:"course",t:"SAP Datasphere — hub da comunidade",u:"https://pages.community.sap.com/topics/datasphere",n:"Blogs, novidades, perguntas reais"},
+    {k:"video",t:"Busca: Datasphere connections remote tables",u:yt("SAP Datasphere connection remote table federation tutorial"),n:""}]},
+{d:10,w:2,h:"2,5h",t:"Graphical Views e SQL Views",
+ g:"A camada de dados. Construa as duas variantes do mesmo resultado e <strong>compare</strong> — vai precisar de ter opinião sobre quando usar cada uma.",
+ l:[{k:"course",t:"Learning Journey: SAP Datasphere — modelação de dados",u:"https://help.sap.com/learning-journeys/c4fcae2e2b7645109ab3315e8a7a6b10",n:""},
+    {k:"video",t:"Busca: Datasphere graphical view vs SQL view",u:yt("SAP Datasphere graphical view SQL view tutorial"),n:""}]},
+{d:11,w:2,h:"2,5h",t:"Business Entities: dimensions e facts",
+ g:"A camada de negócio. Aqui o seu instinto de BW é vantagem direta: <strong>é modelação dimensional com outro nome</strong>.",
+ l:[{k:"course",t:"Learning Journey: SAP Datasphere — camada de negócio",u:"https://help.sap.com/learning-journeys/c4fcae2e2b7645109ab3315e8a7a6b10",n:""},
+    {k:"video",t:"Busca: Datasphere business entity dimension fact",u:yt("SAP Datasphere business entity dimension fact modeling"),n:""}]},
+{d:12,w:2,h:"2,5h",t:"Analytic Models",
+ g:"O sucessor do CompositeProvider. É o objeto que o SAC consome — <strong>é a peça que liga tudo</strong>.",
+ l:[{k:"course",t:"Learning Journey: SAP Datasphere — analytic models",u:"https://help.sap.com/learning-journeys/c4fcae2e2b7645109ab3315e8a7a6b10",n:""},
+    {k:"video",t:"Busca: Datasphere analytic model tutorial",u:yt("SAP Datasphere analytic model tutorial"),n:""}]},
+{d:13,w:2,h:"2,5h",t:"Data Flows e Replication Flows",
+ g:"Onde o seu ETL de BW se traduz. Data Flow ≈ transformação; Replication Flow ≈ carga em massa. <strong>Construa um de cada.</strong>",
+ l:[{k:"course",t:"Learning Journey: SAP Datasphere — flows",u:"https://help.sap.com/learning-journeys/c4fcae2e2b7645109ab3315e8a7a6b10",n:""},
+    {k:"video",t:"Busca: Datasphere data flow replication flow",u:yt("SAP Datasphere data flow replication flow tutorial"),n:""}]},
+{d:14,w:2,h:"3h",t:"Fluxo ponta a ponta completo — artefato 1",
+ g:"Junte tudo: <strong>fonte → view → analytic model → story no SAC</strong>. Sem atalhos, do início ao fim. Tire prints de cada etapa; é o esqueleto visual do artigo.",
+ l:[{k:"lab",t:"Laboratório: construir o fluxo completo",u:"",n:"Se travar em alguma etapa, anote onde — o ponto onde trava é conteúdo do artigo"},
+    {k:"video",t:"Busca: Datasphere end to end SAC story",u:yt("SAP Datasphere end to end tutorial SAC story"),n:""}]},
+
+/* ---------------- SEMANA 3 ---------------- */
+{d:15,w:3,h:"2,5h",t:"BW Bridge: o que é e quando se usa",
+ g:"O produto que a SAP desenhou para o seu perfil. Entenda o <strong>modelo de transporte e o ciclo de vida</strong> antes de tocar em objetos.",
+ l:[{k:"course",t:"Modeling in SAP Datasphere, SAP BW bridge",u:"https://learning.sap.com/learning-journeys/modeling-in-sap-datasphere-sap-bw-bridge",n:"4h15 · 5 unidades · intermediate — a journey central desta semana"},
+    {k:"course",t:"SAP Datasphere, SAP BW Bridge — hub",u:"https://pages.community.sap.com/topics/datasphere/bw-bridge",n:"Página oficial do tema"},
+    {k:"video",t:"Busca: SAP BW Bridge Datasphere tutorial",u:yt("SAP BW bridge Datasphere tutorial migration"),n:""}]},
+{d:16,w:3,h:"2,5h",t:"BW Bridge: criar objetos e carregar dados",
+ g:"Unidades 2 e 3 da journey. <strong>Terreno conhecido com roupa nova</strong> — vai reconhecer quase tudo.",
+ l:[{k:"course",t:"Modeling in SAP Datasphere, SAP BW bridge — unidades 2–3",u:"https://learning.sap.com/courses/modeling-in-sap-datasphere-sap-bw-bridge",n:"Criação de objetos BW e carga de dados"},
+    {k:"video",t:"Busca: BW bridge load data scheduling",u:yt("SAP BW bridge load data scheduling Datasphere"),n:""}]},
+{d:17,w:3,h:"2,5h",t:"Consumir objetos do Bridge no tenant principal",
+ g:"Unidades 4 e 5. É aqui que o Bridge deixa de ser curiosidade e vira <strong>caminho de migração real</strong>.",
+ l:[{k:"course",t:"Modeling in SAP Datasphere, SAP BW bridge — unidades 4–5",u:"https://learning.sap.com/courses/modeling-in-sap-datasphere-sap-bw-bridge",n:"Consumo no core tenant e agendamento"},
+    {k:"lab",t:"Laboratório: um objeto BW seu, ponta a ponta pelo Bridge",u:"",n:"Escolha algo do seu passado — FI, CO, SD. Quanto mais real, melhor."}]},
+{d:18,w:3,h:"2,5h",t:"Federação vs replicação — medir, não opinar",
+ g:"<strong>O dia que vale uma entrevista inteira.</strong> Mesmo dado, dois caminhos. Meça latência, meça consumo. Anote quando cada um se justifica — com número.",
+ l:[{k:"lab",t:"Laboratório: comparação medida",u:"",n:"Tabela: cenário · latência · custo · quando usar. Isto é um artigo sozinho."},
+    {k:"video",t:"Busca: Datasphere federation vs replication performance",u:yt("SAP Datasphere federation vs replication performance cost"),n:""}]},
+{d:19,w:3,h:"2,5h",t:"Data Access Controls",
+ g:"A sua Analysis Authorization renasce aqui. <strong>Reproduza uma regra de autorização de verdade</strong>, dessas que davam trabalho no BW.",
+ l:[{k:"course",t:"Learning Journey: SAP Datasphere — segurança",u:"https://help.sap.com/learning-journeys/c4fcae2e2b7645109ab3315e8a7a6b10",n:""},
+    {k:"video",t:"Busca: Datasphere data access control tutorial",u:yt("SAP Datasphere data access control row level security"),n:""}]},
+{d:20,w:3,h:"2,5h",t:"Catalog, linhagem e governança",
+ g:"O que o cliente DACH pergunta quando o assunto é auditoria. <strong>Linhagem e glossário</strong> vendem projeto — não subestime.",
+ l:[{k:"course",t:"Learning Journey: SAP Datasphere — catálogo",u:"https://help.sap.com/learning-journeys/c4fcae2e2b7645109ab3315e8a7a6b10",n:""},
+    {k:"video",t:"Busca: Datasphere catalog lineage governance",u:yt("SAP Datasphere catalog lineage data governance"),n:""}]},
+{d:21,w:3,h:"2h",t:"Validar o mapa BW → Datasphere — artefato 2",
+ g:"Pegue a tabela de tradução deste portal e <strong>marque o que se confirmou e o que não</strong> na prática. Onde a analogia falha é exatamente o conteúdo mais valioso do artigo.",
+ l:[{k:"lab",t:"Escrever: mapa validado na prática",u:"",n:"Onde a analogia BW→Datasphere segura, e onde engana"}]},
+
+/* ---------------- SEMANA 4 ---------------- */
+{d:22,w:4,h:"2,5h",t:"O cenário sujo: escolher e mapear",
+ g:"Escolha um cenário BW real do seu passado — <strong>com as sujeiras</strong>: rotina ABAP não documentada, hierarquia desbalanceada, delta que quebra, master data duplicado. Tutorial limpo não prova nada, porque ninguém tem cenário limpo.",
+ l:[{k:"lab",t:"Laboratório: desenhar o cenário e listar as sujeiras",u:"",n:"A lista de sujeiras é o índice do artigo"}]},
+{d:23,w:4,h:"3h",t:"O cenário sujo: construir",
+ g:"Mão na massa. <strong>Não contorne as sujeiras</strong> — enfrente-as. É por elas que o artigo vale.",
+ l:[{k:"lab",t:"Laboratório: construir em Datasphere",u:"",n:""},
+    {k:"video",t:"Busca: Datasphere migration BW real scenario",u:yt("SAP BW to Datasphere migration real scenario lessons"),n:"Ver como outros descreveram problemas parecidos"}]},
+{d:24,w:4,h:"3h",t:"O cenário sujo: onde quebrou",
+ g:"Terminar e <strong>documentar cada ponto de fricção</strong>. O que a SAP não conta, o que a documentação omite, o que só se descobre fazendo. Este é o conteúdo que ninguém mais tem.",
+ l:[{k:"lab",t:"Escrever: pontos de fricção, um a um",u:"",n:"Problema · o que tentou · o que funcionou · o que faria diferente"}]},
+{d:25,w:4,h:"2,5h",t:"Fechar no SAC: story sobre o analytic model",
+ g:"Você já entrega SAC — aqui é só <strong>fechar o circuito</strong> e comprovar a ponta de consumo. Rápido.",
+ l:[{k:"course",t:"Becoming a Certified Data Analyst in SAP Analytics Cloud",u:"https://learning.sap.com/learning-journeys/becoming-a-certified-data-analyst-in-sap-analytics-cloud",n:"Referência; não precisa fazer inteiro"},
+    {k:"course",t:"Exploring SAP Analytics Cloud",u:"https://learning.sap.com/courses/exploring-sap-analytics-cloud",n:"Nivelamento — provavelmente revisão para você"},
+    {k:"video",t:"Busca: SAC live connection Datasphere story",u:yt("SAP Analytics Cloud live connection Datasphere story"),n:""}]},
+{d:26,w:4,h:"2,5h",t:"O trunfo: BPC → SAC Planning",
+ g:"<strong>Provavelmente o seu diferencial mais monetizável</strong> — e não exige aprender nada novo. Leia o guia oficial de migração e mapeie: o que traduz direto do BPC, o que não traduz, onde os projetos quebram.",
+ l:[{k:"course",t:"Guia SAP: acelerar a saída de BPC para SAC Planning",u:"https://community.sap.com/t5/technology-blog-posts-by-sap/accelerate-your-move-from-sap-bpc-to-sap-analytics-cloud-sac-for-planning/ba-p/13568864",n:"Material oficial — a espinha do seu artigo de captação"},
+    {k:"course",t:"BPC live models com SAC Calendar",u:"https://community.sap.com/t5/technology-blog-posts-by-sap/sap-bpc-move-to-sac-how-to-create-a-business-workflow-for-bpc-bw-live/ba-p/13557986",n:"Workflow de negócio para modelos live BPC/BW"},
+    {k:"course",t:"Mastering SAP Analytics Cloud for Planning",u:"https://learning.sap.com/learning-journeys/mastering-sap-analytics-cloud-for-planning",n:"Funcionalidades avançadas — onde o BPC se traduz"},
+    {k:"video",t:"Busca: BPC to SAC Planning migration",u:yt("SAP BPC to SAC Planning migration tutorial"),n:""}]},
+{d:27,w:4,h:"3h",t:"Escrever o artigo — em inglês",
+ g:"Uma peça só, honesta: <strong>o que tentei, o que quebrou, o que aprendi</strong>. Não é tutorial — é relato de quem fez. É por isso que funciona como captação.",
+ l:[{k:"lab",t:"Escrever o artigo",u:"",n:"Estrutura: o cenário real · as sujeiras · o que o Bridge resolveu · federação vs replicação medida · o que faria diferente"},
+    {k:"lab",t:"Guardar em Conteudo/",u:"",n:"A pasta existe para isto"}]},
+{d:28,w:4,h:"2,5h",t:"Publicar, corrigir o CV e verificar as certificações",
+ g:"O dia que fecha o ciclo. Publique o artigo. Depois <strong>atualize o CV</strong>: sai o rótulo provisório do bloco Datasphere, entra entrega demonstrável. E confirme os códigos de certificação.",
+ l:[{k:"lab",t:"Publicar o artigo em inglês",u:"",n:"LinkedIn e/ou SAP Community — onde a agência DACH procura"},
+    {k:"course",t:"Browse SAP Certifications",u:"https://learning.sap.com/certifications",n:"Confirmar C_SAC vs C_SACP_2321/C_SACS_2321 e a dúvida C_HCMOD vs C_HAMOD"},
+    {k:"course",t:"Data Engineer — SAP BW/4HANA",u:"https://learning.sap.com/certifications/sap-certified-associate-reporting-modelling-and-data-acquisition-with-sap-bw-4hana",n:"Confirmar C_BW4H_2404 e o peso de Datasphere"},
+    {k:"lab",t:"Atualizar o CV",u:"",n:"Remover o rótulo do bloco Datasphere · corrigir códigos SAC · acrescentar o laboratório"}]}
+];
+
+/* ---------------- state ---------------- */
+var KEY="vidasap.sprint.v1", DKEY="vidasap.sprint.start";
+var state={};
+try{ state=JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }catch(e){ state={}; }
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} }
+
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+
+/* ---------------- render ---------------- */
+var weeksEl=document.getElementById("weeks");
+weeksEl.style.display="flex";
+weeksEl.style.flexDirection="column";
+weeksEl.style.gap="26px";
+
+WEEKS.forEach(function(W){
+  var sec=document.createElement("section");
+  sec.className="week k"+W.k; sec.id="w"+W.k;
+  var days=DAYS.filter(function(D){ return D.w===W.k; });
+
+  var html='<div class="week-head">'
+    +'<span class="week-n">'+esc(W.n)+'</span>'
+    +'<h2 class="week-t">'+esc(W.t)+'</h2>'
+    +'<span class="week-m">'+esc(W.m)+'</span></div>'
+    +'<p class="week-why">'+W.why+'</p>';
+
+  days.forEach(function(D){
+    var links=D.l.map(function(L){
+      var label = L.u
+        ? '<a href="'+L.u+'" target="_blank" rel="noopener">'+esc(L.t)+'</a>'
+        : '<span class="nolink">'+esc(L.t)+'</span>';
+      var kt = L.k==="video"?"▶":(L.k==="lab"?"⌘":"◆");
+      return '<li><span class="k '+L.k+'" aria-hidden="true">'+kt+'</span>'
+        +'<span class="lk">'+label+(L.n?'<small>'+esc(L.n)+'</small>':'')+'</span></li>';
+    }).join("");
+
+    html+='<article class="day" id="d'+D.d+'" data-day="'+D.d+'">'
+      +'<div class="day-btn" role="button" tabindex="0" aria-expanded="false">'
+        +'<span class="chk" role="button" tabindex="0" aria-pressed="false" '
+        +'aria-label="Marcar dia '+D.d+' como concluído" data-chk="'+D.d+'"></span>'
+        +'<span class="day-n">DIA '+D.d+'</span>'
+        +'<span class="day-t">'+esc(D.t)+'</span>'
+        +'<span class="day-h">'+esc(D.h)+'</span>'
+        +'<span class="caret" aria-hidden="true"></span>'
+      +'</div>'
+      +'<div class="day-body">'
+        +'<p class="goal">'+D.g+'</p>'
+        +'<ul class="links">'+links+'</ul>'
+      +'</div></article>';
+  });
+
+  html+='<div class="out"><b>Artefato da semana</b>'+W.out+'</div>';
+  sec.innerHTML=html;
+  weeksEl.appendChild(sec);
+});
+
+/* accordion — toggle no cabeçalho, exceto no checkbox */
+function toggleOpen(btn){
+  var open=btn.parentElement.classList.toggle("open");
+  btn.setAttribute("aria-expanded",String(open));
+}
+document.querySelectorAll(".day-btn").forEach(function(btn){
+  btn.addEventListener("click",function(e){
+    if(e.target.closest("[data-chk]")) return;
+    toggleOpen(btn);
+  });
+  btn.addEventListener("keydown",function(e){
+    if(e.target.closest("[data-chk]")) return;
+    if(e.key===" "||e.key==="Enter"){ e.preventDefault(); toggleOpen(btn); }
+  });
+});
+
+/* checkbox */
+function toggleDay(n){
+  if(state["d"+n]) delete state["d"+n]; else state["d"+n]=true;
+  save(); paint();
+}
+document.querySelectorAll("[data-chk]").forEach(function(c){
+  c.addEventListener("click",function(e){ e.stopPropagation(); toggleDay(+c.dataset.chk); });
+  c.addEventListener("keydown",function(e){
+    if(e.key===" "||e.key==="Enter"){ e.preventDefault(); e.stopPropagation(); toggleDay(+c.dataset.chk); }
+  });
+});
+
+/* ---------------- calendar ---------------- */
+var cal=document.getElementById("cal");
+DAYS.forEach(function(D){
+  var b=document.createElement("button");
+  b.type="button"; b.className="cell"; b.dataset.w=D.w; b.dataset.day=D.d;
+  b.title="Dia "+D.d+" — "+D.t;
+  b.innerHTML='<span class="dn">'+D.d+'</span><span class="wk">S'+D.w+'</span>';
+  b.addEventListener("click",function(){
+    var el=document.getElementById("d"+D.d);
+    if(!el) return;
+    el.classList.add("open");
+    el.scrollIntoView({block:"center"});
+  });
+  cal.appendChild(b);
+});
+
+/* ---------------- paint ---------------- */
+var pendOnly=false;
+function paint(){
+  var done=0;
+  DAYS.forEach(function(D){
+    var on=!!state["d"+D.d];
+    if(on) done++;
+    var art=document.getElementById("d"+D.d);
+    if(art){
+      art.classList.toggle("done",on);
+      var c=art.querySelector("[data-chk]");
+      if(c) c.setAttribute("aria-pressed",String(on));
+      art.classList.toggle("hide", pendOnly && on);
+    }
+    var cell=cal.querySelector('.cell[data-day="'+D.d+'"]');
+    if(cell) cell.classList.toggle("done",on);
+  });
+  var pct=Math.round(done/DAYS.length*100);
+  document.getElementById("pct").textContent=pct+"%";
+  document.getElementById("frac").textContent="("+done+"/"+DAYS.length+" dias)";
+  document.getElementById("fill").style.transform="scaleX("+(done/DAYS.length)+")";
+}
+
+/* ---------------- today ---------------- */
+var startEl=document.getElementById("start"), chip=document.getElementById("chip");
+function todayISO(){
+  var d=new Date();
+  return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);
+}
+var stored=null;
+try{ stored=localStorage.getItem(DKEY); }catch(e){}
+startEl.value=stored||todayISO();
+
+var todayN=0;
+function tick(){
+  try{ localStorage.setItem(DKEY,startEl.value); }catch(e){}
+  var s=new Date(startEl.value+"T00:00:00");
+  document.querySelectorAll(".cell.today").forEach(function(e){ e.classList.remove("today"); });
+  document.querySelectorAll(".day.is-today").forEach(function(e){ e.classList.remove("is-today"); });
+  if(isNaN(s.getTime())){ chip.textContent=""; todayN=0; return; }
+  var n=Math.floor((new Date(todayISO()+"T00:00:00")-s)/86400000)+1;
+  todayN=n;
+  if(n<1){ chip.innerHTML="<strong>—</strong>começa em "+(1-n)+" dias"; return; }
+  if(n>28){ chip.innerHTML="<strong>fim</strong>sprint concluído"; return; }
+  var D=DAYS[n-1];
+  chip.innerHTML="<strong>Dia "+n+" / 28</strong>Semana "+D.w+" · "+D.h;
+  var cell=cal.querySelector('.cell[data-day="'+n+'"]');
+  if(cell) cell.classList.add("today");
+  var art=document.getElementById("d"+n);
+  if(art){ art.classList.add("is-today"); art.classList.add("open"); }
+}
+startEl.addEventListener("change",function(){ tick(); paint(); });
+
+/* ---------------- controls ---------------- */
+document.getElementById("fToday").addEventListener("click",function(){
+  var n=(todayN>=1&&todayN<=28)?todayN:1;
+  var el=document.getElementById("d"+n);
+  if(el){ el.classList.add("open"); el.scrollIntoView({block:"center"}); }
+});
+var pendBtn=document.getElementById("fPend");
+pendBtn.addEventListener("click",function(){
+  pendOnly=!pendOnly;
+  pendBtn.classList.toggle("on",pendOnly);
+  pendBtn.setAttribute("aria-pressed",String(pendOnly));
+  pendBtn.textContent=pendOnly?"Mostrar tudo":"Só pendentes";
+  paint();
+});
+document.getElementById("fReset").addEventListener("click",function(){
+  if(!confirm("Zerar o progresso dos 28 dias?")) return;
+  state={}; save(); paint();
+});
+
+tick(); paint();
+})();
+</script>
