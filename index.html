@@ -351,6 +351,33 @@ tbody tr.hi td{background:color-mix(in oklab,var(--copper) 13%, transparent)}
 .dot{display:inline-block; width:7px; height:7px; border-radius:99px;
   margin-right:6px; vertical-align:middle}
 .dot.hi{background:var(--w2)} .dot.md{background:var(--copper-2)} .dot.lo{background:var(--muted)}
+
+/* ============ ENTREVISTA ============ */
+.qa{border:1px solid var(--line); border-radius:9px; background:var(--surface); overflow:hidden}
+.qa + .qa{margin-top:8px}
+.qa-q{width:100%; text-align:left; display:flex; gap:11px; align-items:flex-start;
+  padding:13px 15px; background:none; border:none; cursor:pointer;
+  font-family:inherit; color:var(--ink)}
+.qa-q:hover{background:var(--surface-2)}
+.qa-en{flex:1 1 auto; font-size:14.5px; font-weight:600; letter-spacing:-.005em; line-height:1.4}
+.qa-tag{flex:0 0 auto; font-family:var(--mono); font-size:9px; letter-spacing:.09em;
+  text-transform:uppercase; padding:3px 8px; border-radius:99px; margin-top:2px;
+  background:var(--surface-3); color:var(--muted)}
+.qa-tag.trap{background:var(--copper-dim); color:var(--copper)}
+.qa-tag.win{background:color-mix(in oklab,var(--w2) 18%, transparent); color:var(--w1)}
+@media (prefers-color-scheme:dark){ .qa-tag.win{color:var(--w4)} }
+:root[data-theme="dark"] .qa-tag.win{color:var(--w4)}
+:root[data-theme="light"] .qa-tag.win{color:var(--w1)}
+.qa-a{display:none; padding:13px 15px 15px; flex-direction:column; gap:9px;
+  border-top:1px solid var(--line)}
+.qa.open .qa-a{display:flex}
+.qa-a p{margin:0; font-size:13.5px; color:var(--ink-soft); max-width:72ch; line-height:1.6}
+.qa-a b{color:var(--ink)}
+.say{font-family:var(--serif); font-size:14.5px; font-style:italic; color:var(--ink);
+  border-left:2px solid var(--copper); padding-left:13px; max-width:72ch}
+.vocab{display:flex; flex-wrap:wrap; gap:6px; margin:0}
+.vocab span{font-family:var(--mono); font-size:11px; padding:3px 8px; border-radius:5px;
+  background:var(--surface-2); border:1px solid var(--line); color:var(--ink-soft)}
 .hide{display:none !important}
 noscript{display:block; padding:16px; background:var(--surface);
   border:1px solid var(--copper); border-radius:10px; font-size:14px}
@@ -380,6 +407,8 @@ noscript{display:block; padding:16px; background:var(--surface);
       id="tabbtn-sprint" aria-controls="tab-sprint" aria-selected="true">Sprint · 28 dias</button>
     <button class="tab" type="button" role="tab" data-tab="mercado"
       id="tabbtn-mercado" aria-controls="tab-mercado" aria-selected="false" tabindex="-1">Mercado &amp; rates</button>
+    <button class="tab" type="button" role="tab" data-tab="entrevista"
+      id="tabbtn-entrevista" aria-controls="tab-entrevista" aria-selected="false" tabindex="-1">Entrevista técnica</button>
   </div>
 
   <div class="tabpanel" id="tab-sprint" role="tabpanel" aria-labelledby="tabbtn-sprint">
@@ -485,18 +514,20 @@ noscript{display:block; padding:16px; background:var(--surface);
           <tr data-lo="904" data-hi="904"><td><strong>Alemanha</strong> <i style="font-style:normal;color:var(--muted)">· média SAP &amp; ERP</i></td><td class="num"><strong>~904</strong></td><td class="num c1">—</td><td class="num c2">—</td><td><span class="dot hi"></span>alta</td></tr>
           <tr data-lo="640" data-hi="1280"><td>Alemanha <i style="font-style:normal;color:var(--muted)">· IT sénior, sem recorte SAP</i></td><td class="num">640–1.280</td><td class="num c1">—</td><td class="num c2">—</td><td><span class="dot md"></span>média</td></tr>
           <tr data-lo="545" data-hi="1015"><td>Suécia <i style="font-style:normal;color:var(--muted)">· IT sénior</i></td><td class="num">545–1.015</td><td class="num c1">—</td><td class="num c2">—</td><td><span class="dot md"></span>média</td></tr>
-          <tr class="hi"><td><strong>Portugal — o que se observa hoje</strong></td><td class="num">—</td><td class="num">—</td><td class="num"><b>350–600</b></td><td><span class="dot lo"></span>baixa</td></tr>
+          <tr class="hi"><td><strong>Portugal — mercado doméstico</strong></td><td class="num"><b>200–250</b><br><span class="conf">especialista 300</span></td><td class="num">—</td><td class="num">—</td><td><span class="dot hi"></span>alta</td></tr>
         </tbody>
       </table>
     </div>
-    <p><strong>Repare na última linha.</strong> Os €350–600 que se pagam em Portugal não estão numa coluna de mercado — caem exatamente na coluna de <em>duas camadas</em>. Não é coincidência: <strong>o preço nearshore não é um preço de mercado, é o preço onshore menos as camadas.</strong></p>
+    <p><strong>A última linha está na coluna do onshore, e é de propósito.</strong> Os €200–250 (€300 para especialista, e difíceis de encontrar) são o <em>onshore português</em> — orçamento de cliente português, economia portuguesa. Não são o resultado de nenhuma cadeia: duas camadas sobre o alemão dariam €615, muito acima disto.</p>
+    <p><strong>São três preços, não dois.</strong> Onshore português €250 · nearshore para o DACH, conforme a cadeia, €435–723 · onshore alemão €904. Entre o primeiro e o último há <strong>3,6 vezes</strong> — e nenhuma delas é diferença de competência.</p>
     <p>Daí a Dinamarca ser a linha a vigiar: paga tão bem ou melhor que a Alemanha em SAP/ERP sénior e trabalha em inglês por omissão. Sobe o topo da cadeia sem exigir alemão.</p>
-    <p><span class="conf">confiança ·</span> a coluna de confiança aplica-se ao <strong>onshore</strong>. As duas colunas derivadas herdam essa incerteza e somam-lhe a do modelo de margens.</p>
+    <p><span class="conf">confiança ·</span> a coluna aplica-se ao <strong>onshore</strong>. O valor de Portugal vem de conhecimento direto do mercado — é o mais fiável desta tabela, apesar de ser o único sem estudo por trás. As colunas derivadas herdam a incerteza do onshore e somam-lhe a do modelo de margens.</p>
   </section>
 
   <section class="panel flag">
-    <h2>A segunda consultoria — é ela que fabrica o preço nearshore</h2>
-    <p><strong>«Preço de Portugal» não existe como preço de mercado.</strong> O que existe é o orçamento do cliente final — alemão, dinamarquês, holandês — menos a margem de cada intermediário pelo caminho. O que sobra é que se chama nearshore.</p>
+    <h2>A segunda consultoria — o que a cadeia come no caminho</h2>
+    <p><strong>Cuidado com a confusão de dois preços diferentes.</strong> O onshore português (€200–300) é um mercado próprio, com orçamento próprio — não é o alemão descontado. Já o <em>nearshore</em>, o trabalho que se faz de cá para um cliente do DACH, esse é mesmo o orçamento dele menos a margem de cada intermediário pelo caminho.</p>
+    <p>É esta segunda situação que se controla, e é onde está o dinheiro: um orçamento alemão de €1.200 tanto pode chegar cá a €1.200 como a €816, e o trabalho é o mesmo.</p>
     <p><code>cliente → você</code> é raro no início · <code>cliente → agência → você</code> é o padrão · <code>cliente → consultora principal → agência → você</code> acontece quando quem ganhou o contrato subcontrata.</p>
     <p><strong>Duas camadas com margens normais comem cerca de um terço do orçamento.</strong> O mesmo projeto, o mesmo cliente, o mesmo trabalho — e um rate que parece mau sem que ninguém lhe tenha mentido. Ajuste as margens e veja (a tabela de países acima recalcula junto):</p>
 
@@ -535,21 +566,21 @@ noscript{display:block; padding:16px; background:var(--surface);
   </section>
 
   <section class="panel">
-    <h2>Duas alavancas — e a barata não é a óbvia</h2>
-    <p>Se o preço nearshore é o preço onshore menos as camadas, então há <strong>duas</strong> formas de o subir, e não uma:</p>
-    <p><strong>Trocar de mercado</strong> sobe o topo da cadeia. <strong>Encurtar a cadeia</strong> sobe a sua fatia dela. A tese do <code>README</code> só contempla a primeira — mas partindo da Alemanha, com as margens do painel anterior:</p>
+    <h2>Duas alavancas, por esta ordem</h2>
+    <p>São <strong>duas</strong> formas de subir o preço, e não uma. <strong>Sair do mercado doméstico</strong> troca um orçamento português por um alemão. <strong>Encurtar a cadeia</strong> aumenta a fatia desse orçamento que fica consigo. Partindo dos €250 que o mercado português paga hoje:</p>
     <div class="tbl-wrap">
       <table>
         <thead><tr><th>Movimento</th><th>Chega-me</th><th>Ganho</th></tr></thead>
         <tbody>
-          <tr><td>Hoje — Alemanha, por baixo de 2 camadas</td><td class="num" id="cxNow">—</td><td class="num">—</td></tr>
-          <tr><td>Trocar para a Dinamarca, mantendo as 2 camadas</td><td class="num" id="cxDk">—</td><td class="num" id="cxDkG">—</td></tr>
-          <tr><td>Ficar na Alemanha, cortar para <strong>1 camada</strong></td><td class="num" id="cx1">—</td><td class="num" id="cx1G">—</td></tr>
-          <tr class="hi"><td>Ficar na Alemanha, ir a <strong>direto</strong></td><td class="num"><b id="cx0">—</b></td><td class="num"><b id="cx0G">—</b></td></tr>
+          <tr><td><strong>Hoje</strong> — mercado português, especialista</td><td class="num">200–300</td><td class="num">—</td></tr>
+          <tr><td>Cliente alemão, por baixo de <strong>2 camadas</strong></td><td class="num" id="cxNow">—</td><td class="num" id="cxNowG">—</td></tr>
+          <tr><td>Cliente dinamarquês, também sob 2 camadas</td><td class="num" id="cxDk">—</td><td class="num" id="cxDkG">—</td></tr>
+          <tr><td>Cliente alemão, cortar para <strong>1 camada</strong></td><td class="num" id="cx1">—</td><td class="num" id="cx1G">—</td></tr>
+          <tr class="hi"><td>Cliente alemão, ir a <strong>direto</strong></td><td class="num"><b id="cx0">—</b></td><td class="num"><b id="cx0G">—</b></td></tr>
         </tbody>
       </table>
     </div>
-    <p><strong>Sem mudar de país, sem aprender alemão, sem mercado novo:</strong> tirar um intermediário do meio vale mais do que a maioria das trocas de mercado. E o mercado que já conhece é aquele onde tem 20 anos de referências.</p>
+    <p><strong>A ordem importa e não é a que parece.</strong> O primeiro salto — passar a ter cliente do DACH, mesmo por baixo de duas consultoras — é de longe o maior. Só depois é que encurtar a cadeia acrescenta. Quem tenta ir a direto antes de ter cliente lá fora está a otimizar a fatia de um bolo que ainda não tem.</p>
     <p>O senão é real e já está medido noutro sítio desta aba: o cliente alemão prefere intermediário precisamente porque ele <strong>absorve o risco jurídico</strong> de contratar um independente lá fora. Ir a direto à primeira raramente resulta. O caminho que resulta é outro — <strong>entrar por agência, e comprimir a cadeia na renovação</strong>, quando já há relação, entregas feitas e o cliente tem mais a perder em trocá-lo do que em contratá-lo diretamente.</p>
     <p>Por isso o sprint continua a valer: encurtar a cadeia só se negoceia de uma posição de prova entregue. <strong>Sem prova, é a cadeia que decide o seu preço; com prova, é você.</strong></p>
   </section>
@@ -590,6 +621,260 @@ noscript{display:block; padding:16px; background:var(--surface);
   </section>
 
   </div><!-- /tab-mercado -->
+
+  <div class="tabpanel hide" id="tab-entrevista" role="tabpanel" aria-labelledby="tabbtn-entrevista">
+
+  <section class="panel">
+    <h2>Como funciona a entrevista técnica</h2>
+    <p>Normalmente são duas fases, e confundi-las custa caro. O <strong>screening da agência</strong> não é técnico — é filtro de palavras-chave, e quem o faz muitas vezes não sabe o que é um ADSO. Responda em termos simples e não gaste aí os argumentos bons. A <strong>entrevista com o cliente</strong> é onde se decide, e testa três coisas: se <em>fez mesmo</em>, se <em>sabe decidir</em>, e se <em>sabe dizer que não sabe</em>.</p>
+    <p>A terceira é a que mais gente falha. Em projetos de migração, ninguém acredita em quem sabe tudo — <strong>admitir um limite com precisão vale mais do que cobrir com generalidades</strong>, porque quem está do outro lado já foi enganado antes.</p>
+    <p>Em inglês há um risco específico e não é o sotaque: <strong>responder curto por insegurança na língua</strong>. Uma resposta de dez segundos lê-se como falta de experiência, não como falta de vocabulário. Prepare respostas de 60–90 segundos com estrutura: <em>situação → decisão → número → resultado</em>.</p>
+    <p class="vocab"><span>pushdown</span><span>pruning</span><span>cardinality</span><span>referential join</span><span>persisted vs virtual</span><span>delta capability</span><span>data lineage</span><span>semantic layer</span><span>staging</span><span>cutover</span><span>housekeeping</span><span>to onboard a source</span></p>
+    <p><span class="conf">como usar ·</span> clique numa pergunta para abrir. As marcadas <span class="qa-tag trap">armadilha</span> são as que apanham quem estudou mas não praticou; as <span class="qa-tag win">terreno seu</span> são as que deve puxar para si.</p>
+  </section>
+
+  <section class="panel">
+    <h2>SAP HANA Cloud — onde 3 anos de intervalo se notam</h2>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“You've worked with HANA on-premise. What actually changes in HANA Cloud?”</span>
+        <span class="qa-tag trap">armadilha</span></button>
+      <div class="qa-a">
+        <p><b>O que testam:</b> se acompanhou o produto ou se parou por volta de 2022.</p>
+        <p><b>A armadilha:</b> falar de <em>sizing</em> de hardware, de HANA Studio ou de schemas clássicos. Qualquer um dos três data a sua experiência num segundo.</p>
+        <p><b>Responder:</b> os conceitos de modelação transitam quase todos — o que muda é o <em>tooling</em> e o modelo operacional. Saiu o Studio; entraram o <b>HANA Cloud Central</b>, o <b>Database Explorer</b> e o <b>Business Application Studio</b>. E dimensionar deixou de ser um exercício de hardware para ser um exercício de <b>custo</b>: a instância para, arranca e redimensiona, e isso aparece na fatura.</p>
+        <p class="say">“The modelling concepts carry over almost unchanged. What changed is the tooling and the operating model — sizing is now a cost decision rather than a hardware decision, and that changes how you design.”</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“Which view types do you use when you model?”</span>
+        <span class="qa-tag trap">armadilha</span></button>
+      <div class="qa-a">
+        <p><b>O que testam:</b> se o seu conhecimento ficou preso em 2016.</p>
+        <p><b>A armadilha:</b> mencionar <b>Attribute Views</b> e <b>Analytic Views</b> como opções válidas. Estão depreciadas desde o HANA 2.0 e <b>não existem em HANA Cloud</b>. Quem as nomeia como escolha corrente perde a entrevista ali.</p>
+        <p><b>Responder:</b> só <em>calculation views</em>, gráficas ou SQLScript. Tipos: <b>dimension</b> e <b>cube</b>, este último com ou sem <em>star join</em>. Nós: projection, join, aggregation, union, rank.</p>
+        <p class="say">“Only calculation views — attribute and analytic views were deprecated back in HANA 2.0 and aren't available in HANA Cloud at all.”</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“What is an HDI container, and why should I care?”</span>
+        <span class="qa-tag trap">armadilha</span></button>
+      <div class="qa-a">
+        <p><b>O que testam:</b> se vem do mundo de desenvolvimento ou só do de modelação. Separa consultores de <em>data engineers</em>.</p>
+        <p><b>A armadilha:</b> responder “é um schema”. É a resposta que toda a gente dá e nenhuma equipa aceita.</p>
+        <p><b>Responder:</b> é a <b>unidade de deployment</b> — traz o seu próprio schema gerado e um utilizador técnico, isola design-time de runtime e torna o deploy repetível e versionável. O detalhe que mostra prática: <b>acesso entre containers não é automático</b>, exige sinónimos e <em>grants</em> explícitos, e é aí que a maioria dos projetos tropeça na primeira semana.</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“A calculation view is slow in production. Walk me through what you do.”</span>
+        <span class="qa-tag win">terreno seu</span></button>
+      <div class="qa-a">
+        <p><b>O que testam:</b> se já apanhou o problema a sério, com utilizadores à espera.</p>
+        <p><b>A armadilha:</b> “aumentava a memória”. Sinaliza alguém que nunca teve de justificar uma fatura.</p>
+        <p><b>Responder com método:</b> <em>Explain Plan</em> e <em>Performance Analysis</em> no Database Explorer; procurar quebra de <b>pushdown</b>, joins sem cardinalidade declarada, agregação a acontecer tarde demais no grafo, <em>keep flag</em> mal usado e <b>union pruning</b> que não está a disparar. Medir antes e depois — e é aqui que 20 anos de BW valem: já viu isto com nomes diferentes.</p>
+        <p class="say">“I start with the explain plan and check whether the aggregation is being pushed down. Nine times out of ten it's a join cardinality that isn't declared, or pruning that isn't kicking in.”</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>BW/4HANA e BW Bridge — a vantagem injusta</h2>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“Talk me through the BW Bridge conversion options.”</span>
+        <span class="qa-tag trap">armadilha</span></button>
+      <div class="qa-a">
+        <p><b>Provavelmente a pegadinha mais provável de todas para quem vem de BW.</b></p>
+        <p><b>A armadilha:</b> mencionar <b>in-place conversion</b>. <em>In-place</em> existe para BW → BW/4HANA <b>on-premise</b> — <b>não</b> para BW Bridge. Para o Bridge há dois caminhos: <b>shell conversion</b> (leva as estruturas, sem dados) e <b>remote conversion</b> (estruturas mais dados selecionados). Confundir isto é o sinal clássico de quem leu a brochura.</p>
+        <p><b>Responder:</b> nomear os dois, dizer quando escolhe cada um — shell quando se quer aproveitar a migração para limpar histórico e sujeira acumulada; remote quando há histórico que o negócio não abdica.</p>
+        <p class="say">“Shell or remote — in-place isn't an option for the Bridge, that's the on-premise path. I'd default to shell unless there's history the business genuinely can't reload.”</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“What can't you do in BW Bridge?”</span>
+        <span class="qa-tag trap">armadilha</span></button>
+      <div class="qa-a">
+        <p><b>O que testam:</b> se percebe as fronteiras do produto — quem só sabe o que ele <em>faz</em> normalmente nunca o usou.</p>
+        <p><b>Responder:</b> é ABAP a correr em BTP e serve <b>fontes SAP</b>; para o resto usa-se o Datasphere diretamente. Não é lá que se consome — o Bridge alimenta o Datasphere, e é aí que o utilizador chega. Objetos clássicos como InfoCube e MultiProvider não transitam, e não há BEx para o utilizador final.</p>
+        <p><b>Aproveitar:</b> esta pergunta é uma boa deixa para dizer que a decisão importante não é técnica, é de âmbito — <em>o que vale a pena trazer</em>.</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“You have 20 years of BW. Isn't that a liability on a cloud project?”</span>
+        <span class="qa-tag win">terreno seu</span></button>
+      <div class="qa-a">
+        <p><b>O que testam:</b> se fica na defensiva. A pergunta é quase sempre um teste de postura, não de conteúdo.</p>
+        <p><b>A armadilha:</b> pedir desculpa pelo legado, ou compensar com entusiasmo por cloud. As duas soam mal.</p>
+        <p><b>Responder:</b> virar a pergunta. O BW Bridge foi desenhado <em>literalmente</em> para migrar quem tem esse passado — o público-alvo do produto é você. Quem entra sem ele não reconhece uma rotina de transformação que ninguém documentou, uma hierarquia desbalanceada ou um delta que parte em silêncio.</p>
+        <p class="say">“The Bridge exists precisely for systems like the ones I've been running for twenty years. Someone without that background can migrate the objects, but they won't recognise which ones are lying to them.”</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>SAP Datasphere — onde o apanham</h2>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“How is a Space different from an InfoArea?”</span>
+        <span class="qa-tag trap">armadilha</span></button>
+      <div class="qa-a">
+        <p><b>O que testam:</b> se decorou analogias ou se percebeu o modelo.</p>
+        <p><b>A armadilha:</b> responder “é o equivalente ao InfoArea”. É a analogia mais repetida e a que falha pior. O InfoArea é <b>organização</b>; o Space é também <b>quota de recursos</b> — storage e compute atribuídos — além de fronteira de <b>partilha</b> e de <b>segurança</b>. Dimensionar Spaces é uma decisão de arquitetura <em>e de custo</em>, coisa que um InfoArea nunca foi.</p>
+        <p><b>Aproveitar:</b> dizer exatamente isto mostra que fez a comparação a sério em vez de a decorar. É das respostas com melhor retorno da entrevista toda.</p>
+        <p class="say">“Organisationally it plays a similar role, but a Space also carries its own resource quota and sharing boundary — so sizing Spaces is an architecture and cost decision, which an InfoArea never was.”</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“Federation or replication — how do you decide?”</span>
+        <span class="qa-tag trap">armadilha</span></button>
+      <div class="qa-a">
+        <p><b>A pergunta de arquitetura que cai em quase todas as entrevistas.</b></p>
+        <p><b>A armadilha:</b> responder “depende” e parar. Ou dar só o argumento de latência, que é o que toda a gente dá.</p>
+        <p><b>Responder por eixos:</b> latência aceitável para o negócio · volume · <b>carga que se impõe ao sistema fonte</b> · <b>custo</b>, e aqui está a diferença — federação paga-se no <em>fonte</em> e em cada consulta, replicação paga-se em storage e compute no Datasphere · e se a fonte suporta <em>pushdown</em>, porque uma federação sem pushdown traz tudo para memória e é o pior dos dois mundos.</p>
+        <p><b>O que fecha a resposta:</b> um número seu. Está no dia 13 do sprint — depois de o medir, esta pergunta passa a ser sua.</p>
+        <p class="say">“I'd measure both on the actual dataset before deciding. Federation moves the cost to the source system and to every query; replication moves it to storage. The one thing I check first is whether the pushdown actually happens — if it doesn't, federation is the worst of both worlds.”</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“How do you restrict what each user can see?”</span>
+        <span class="qa-tag trap">armadilha</span></button>
+      <div class="qa-a">
+        <p><b>O que testam:</b> se conhece <b>Data Access Controls</b> e, sobretudo, como se comportam.</p>
+        <p><b>A armadilha:</b> assumir que herdam como as Analysis Authorizations do BW. Não herdam. O DAC tem de ser <b>explicitamente aplicado à view</b>, e uma view que consome outra protegida não fica protegida por arrasto — a proteção tem de ser desenhada camada a camada.</p>
+        <p><b>Aproveitar:</b> mencionar que isto obriga a rever o desenho de segurança na migração, em vez de o traduzir um-para-um, mostra que já pensou no problema real.</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“Do you model in the Business Builder or with Analytic Models?”</span>
+        <span class="qa-tag trap">armadilha</span></button>
+      <div class="qa-a">
+        <p><b>O que testam:</b> se o conhecimento é <em>atual</em>. O Datasphere mudou de recomendação e muito material de formação ficou para trás.</p>
+        <p><b>A armadilha:</b> descrever <em>Consumption Models</em> do Business Builder como o caminho recomendado. O foco da SAP deslocou-se para o <b>Analytic Model</b>, no Data Builder.</p>
+        <p><span class="conf">confiança média ·</span> <b>confirmar na documentação antes de qualquer entrevista</b> — esta é uma área em movimento e a resposta certa em janeiro pode não ser a de hoje. Fonte a usar: <code>help.sap.com/docs/SAP_DATASPHERE</code>, não blogues.</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“How much Datasphere have you actually delivered in production?”</span>
+        <span class="qa-tag trap">armadilha</span></button>
+      <div class="qa-a">
+        <p><b>A pergunta que decide o contrato — e a única onde inventar destrói tudo.</b> Quem pergunta isto já foi enganado antes e vai verificar.</p>
+        <p><b>Responder:</b> a verdade, imediatamente, seguida da prova. Sem produção ainda — mas com um laboratório onde migrou um cenário BW <em>real</em>, com rotina não documentada, hierarquia desbalanceada e delta partido. E o artigo publicado que o descreve.</p>
+        <p><b>Porque funciona:</b> desloca a conversa de <em>anos de experiência</em> para <em>problemas resolvidos</em>, que é o terreno onde ganha. Um tutorial limpo não prova nada porque ninguém tem um cenário limpo — <strong>a sujeira é a prova</strong>.</p>
+        <p class="say">“Not in production yet — I'll be straight with you. What I do have is a lab where I migrated a real BW scenario, including the parts that were undocumented and broken. I wrote it up publicly; I can send you the link.”</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Planeamento: BPC → SAC — o trunfo lateral</h2>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“Do you know SAC Planning?”</span>
+        <span class="qa-tag win">terreno seu</span></button>
+      <div class="qa-a">
+        <p><b>A armadilha é a resposta curta.</b> “Sim” desperdiça a melhor carta que tem na mão. Esta pergunta parece de triagem e é uma porta.</p>
+        <p><b>Responder:</b> confirmar que já entregou SAC — e emendar imediatamente com o mapeamento que quase ninguém consegue fazer: <b>Script Logic e FOX</b> → <em>Advanced Formulas</em> e <em>Data Actions</em>; <b>EPM add-in</b> → stories e Analysis for Office; BPC Standard e Embedded têm caminhos diferentes e confundi-los é o erro caro da migração.</p>
+        <p><b>Porque importa:</b> há muita empresa com BPC parado e prazo, e pouquíssima gente que conheça os dois lados. Isto não exige estudar nada — exige <b>dizer que faz</b>.</p>
+        <p class="say">“Yes — and I come at it from the BPC side, which is the part most people are missing right now. Script Logic and FOX map onto advanced formulas, but Standard and Embedded take genuinely different migration paths.”</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“We have BPC and we need to move off it. Where would you start?”</span>
+        <span class="qa-tag win">terreno seu</span></button>
+      <div class="qa-a">
+        <p><b>A pergunta que vale o contrato inteiro.</b> Testam método, não ferramenta.</p>
+        <p><b>Responder com sequência, não com produto:</b> primeiro inventariar o que <em>ainda é usado</em> — em BPC costuma haver metade dos modelos mortos e ninguém quer ser quem o admite; depois separar lógica de negócio de lógica de contorno técnico, porque muita Script Logic existe só para compensar limitações que a SAC já não tem; só então desenhar.</p>
+        <p><b>O que não dizer:</b> nunca prometer conversão automática. Não existe, e quem pergunta sabe.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel flag">
+    <h2>Pegadinhas transversais — as que não são sobre SAP</h2>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“How would you handle [feature that doesn't exist]?”</span>
+        <span class="qa-tag trap">armadilha</span></button>
+      <div class="qa-a">
+        <p><b>Alguns entrevistadores inventam uma funcionalidade de propósito</b> para ver se você faz bluff. É mais comum do que parece em perfis sénior, precisamente porque um sénior tem vergonha de não saber.</p>
+        <p><b>A resposta certa é curta e não custa nada:</b> dizer que não reconhece o termo e pedir que expliquem o que faz. Quem faz esta pergunta está à espera exatamente disso — e quem inventa uma resposta plausível perde tudo o que ganhou até ali.</p>
+        <p class="say">“I don't recognise that name — can you tell me what it does? It may be something I know under a different label, the naming shifts a lot in this space.”</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“Why are you looking to move?” · “Why contracting?”</span>
+        <span class="qa-tag trap">armadilha</span></button>
+      <div class="qa-a">
+        <p><b>A armadilha:</b> falar mal do empregador atual, ou deixar transparecer que a razão é só dinheiro. As duas custam credibilidade mesmo quando são verdade.</p>
+        <p><b>Responder pela positiva e pelo concreto:</b> a onda de migração tem prazo — o fim da manutenção do ECC em 2027 — e é o momento em que vinte anos de BW valem mais do que voltarão a valer. Querer estar do lado da migração e não do lado da manutenção é uma razão que qualquer cliente entende.</p>
+        <p><b>Não precisa de mencionar</b> que continua empregado. Se perguntarem diretamente, a verdade é boa: dá sinal de que não está desesperado, o que ajuda no preço.</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“Are you comfortable working in English?” — e a entrevista inteira em inglês</span>
+        <span class="qa-tag trap">armadilha</span></button>
+      <div class="qa-a">
+        <p><b>A armadilha não é o sotaque — é encurtar as respostas.</b> Quem está inseguro na língua responde em dez segundos, e do outro lado isso lê-se como falta de experiência, não como falta de vocabulário.</p>
+        <p><b>Preparar:</b> três histórias de 60–90 segundos, treinadas em voz alta, com a estrutura <em>situação → decisão → número → resultado</em>. Uma de performance, uma de migração e uma de conflito com o negócio. Servem para 80% das perguntas comportamentais.</p>
+        <p><b>E é legítimo</b> pedir que repitam. <em>“Sorry, could you rephrase that?”</em> não custa nada; responder à pergunta errada custa muito.</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <button class="qa-q" type="button" aria-expanded="false">
+        <span class="qa-en">“What's your rate?” — a meio da entrevista técnica</span>
+        <span class="qa-tag trap">armadilha</span></button>
+      <div class="qa-a">
+        <p><b>Aparece muitas vezes a meio, de propósito</b>, quando você ainda está em modo técnico e menos preparado para negociar.</p>
+        <p><b>Antes de dizer um número:</b> perguntar <b>quantas camadas há entre si e o cliente final</b>. Sem isso, um rate não tem significado — o mesmo número é bom ou mau consoante quem o intermedeia. Está todo desenvolvido na aba <em>Mercado &amp; rates</em>.</p>
+        <p><b>E cotar o líquido</b> que quer receber, sem descontar a cadeia. A margem do intermediário é ele que a tem de vender ao cliente; não é sua para absorver.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>As perguntas que <em>você</em> faz</h2>
+    <p>No fim perguntam sempre se tem questões. Não ter é o pior sinal possível — e as certas fazem duas coisas ao mesmo tempo: mostram experiência e dizem-lhe se vale a pena aceitar.</p>
+    <ol class="ask">
+      <li><b>“How many parties are there between me and the end client?”</b> — decodifica o rate e revela como está montada a cadeia.</li>
+      <li><b>“Is Datasphere already in production here, or is this still a proof of concept?”</b> — muda tudo: num POC é você que decide a arquitetura, em produção herda as decisões de outro.</li>
+      <li><b>“Who made the original architecture decisions, and are they still on the team?”</b> — a pergunta que revela se vai encontrar um sistema com dono ou um órfão.</li>
+      <li><b>“Is there an existing BW landscape to migrate, or is this greenfield?”</b> — se houver BW, você tem vantagem estrutural e deve dizê-lo já.</li>
+      <li><b>“What does success look like at three months?”</b> — se ninguém souber responder, o projeto não tem critério e a renovação vai ser uma discussão de sensações.</li>
+    </ol>
+    <p><span class="conf">nota ·</span> este ficheiro é preparação, não um guião para ler. Uma resposta decorada nota-se — o objetivo é ter pensado no assunto <em>antes</em>, para poder responder com naturalidade e ficar com atenção livre para a conversa.</p>
+  </section>
+
+  </div><!-- /tab-entrevista -->
 
   <footer>
     Progresso guardado só neste browser, nesta máquina. Nada sai daqui.<br>
@@ -951,7 +1236,15 @@ tabBtns.forEach(function(t,i){
 });
 var savedTab=null;
 try{ savedTab=localStorage.getItem(TKEY); }catch(e){}
-showTab(savedTab==="mercado"?"mercado":"sprint",false);
+showTab((savedTab==="mercado"||savedTab==="entrevista")?savedTab:"sprint",false);
+
+/* ---------------- cartões de entrevista ---------------- */
+[].forEach.call(document.querySelectorAll(".qa-q"),function(btn){
+  btn.addEventListener("click",function(){
+    var card=btn.parentNode, open=card.classList.toggle("open");
+    btn.setAttribute("aria-expanded",String(open));
+  });
+});
 
 /* ---------------- rate cascade ---------------- */
 (function(){
@@ -1002,16 +1295,13 @@ showTab(savedTab==="mercado"?"mercado":"sprint",false);
       if(c2) c2.textContent=rng(lo*(1-m1)*(1-m2), hi*(1-m1)*(1-m2));
     });
 
-    /* duas alavancas: trocar de mercado vs encurtar a cadeia (base: Alemanha 904) */
-    var DE=904, DKlo=912, DKhi=1288, chain=(1-m1)*(1-m2);
-    var now=DE*chain;
-    put("cxNow",eur(now));
-    put("cxDk", rng(DKlo*chain, DKhi*chain));
-    put("cxDkG",gain(DKlo*chain, DKhi*chain, now));
-    put("cx1",  eur(DE*(1-m1)));
-    put("cx1G", gain(DE*(1-m1), DE*(1-m1), now));
-    put("cx0",  eur(DE));
-    put("cx0G", gain(DE, DE, now));
+    /* duas alavancas: sair do doméstico vs encurtar a cadeia (base: Portugal 250) */
+    var DE=904, DKlo=912, DKhi=1288, PT=250, chain=(1-m1)*(1-m2);
+    var de2=DE*chain, de1=DE*(1-m1);
+    put("cxNow", eur(de2));                   put("cxNowG",gain(de2, de2, PT));
+    put("cxDk",  rng(DKlo*chain, DKhi*chain));put("cxDkG", gain(DKlo*chain, DKhi*chain, PT));
+    put("cx1",   eur(de1));                   put("cx1G",  gain(de1, de1, PT));
+    put("cx0",   eur(DE));                    put("cx0G",  gain(DE, DE, PT));
   }
   [alvoEl,m1El,m2El,orcEl].forEach(function(el){
     el.addEventListener("input",calc);
