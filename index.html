@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sprint 28 dias — HANA Cloud · Datasphere · SAC</title>
 
 <style>
@@ -309,6 +311,46 @@ tbody tr:nth-child(odd){background:color-mix(in oklab,var(--w2) 7%, transparent)
 td:first-child{color:var(--muted)}
 footer{font-size:12.5px; color:var(--muted); text-align:center; line-height:1.75}
 footer code{font-family:var(--mono)}
+
+/* ============ TABS ============ */
+.tabs{display:flex; gap:2px; border-bottom:1px solid var(--line); flex-wrap:wrap}
+.tab{
+  font-family:var(--mono); font-size:11px; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--muted); background:none; border:none; border-bottom:2px solid transparent;
+  padding:12px 16px; cursor:pointer; margin-bottom:-1px;
+  transition:color .15s ease, border-color .15s ease;
+}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--copper); border-bottom-color:var(--copper)}
+.tabpanel{display:flex; flex-direction:column; gap:26px}
+
+/* ============ MERCADO ============ */
+.anchor-row{display:flex; flex-wrap:wrap; gap:13px}
+.anchor{
+  flex:1 1 155px; background:var(--surface); border:1px solid var(--line);
+  border-radius:10px; padding:14px 16px; display:flex; flex-direction:column; gap:3px;
+}
+.anchor b{font-family:var(--display); font-size:25px; letter-spacing:-.025em;
+  color:var(--copper); line-height:1.1}
+.anchor span{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted)}
+.anchor i{font-style:normal; font-size:12.5px; color:var(--ink-soft); line-height:1.45}
+.calc{display:flex; flex-wrap:wrap; gap:13px; align-items:flex-end}
+.calc input[type="number"]{
+  font-family:var(--mono); font-size:13px; color:var(--ink); width:112px;
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:6px; padding:7px 9px;
+}
+td.num{font-family:var(--mono); text-align:right; white-space:nowrap}
+td.num b{color:var(--copper); font-size:14.5px}
+tbody tr.hi td{background:color-mix(in oklab,var(--copper) 13%, transparent)}
+.ask{margin:0; padding-left:19px; font-size:14px; color:var(--ink-soft);
+  max-width:70ch; display:flex; flex-direction:column; gap:8px}
+.ask li::marker{color:var(--copper)}
+.ask b{color:var(--ink)}
+.dot{display:inline-block; width:7px; height:7px; border-radius:99px;
+  margin-right:6px; vertical-align:middle}
+.dot.hi{background:var(--w2)} .dot.md{background:var(--copper-2)} .dot.lo{background:var(--muted)}
 .hide{display:none !important}
 noscript{display:block; padding:16px; background:var(--surface);
   border:1px solid var(--copper); border-radius:10px; font-size:14px}
@@ -332,6 +374,15 @@ noscript{display:block; padding:16px; background:var(--surface);
   </header>
 
   <noscript>Este portal precisa de JavaScript para marcar progresso e abrir os dias. O conteúdo e os links estão todos no ficheiro <code>Estudos/TRILHA.md</code>.</noscript>
+
+  <div class="tabs" role="tablist" aria-label="Secções do portal">
+    <button class="tab" type="button" role="tab" data-tab="sprint"
+      id="tabbtn-sprint" aria-controls="tab-sprint" aria-selected="true">Sprint · 28 dias</button>
+    <button class="tab" type="button" role="tab" data-tab="mercado"
+      id="tabbtn-mercado" aria-controls="tab-mercado" aria-selected="false" tabindex="-1">Mercado &amp; rates</button>
+  </div>
+
+  <div class="tabpanel" id="tab-sprint" role="tabpanel" aria-labelledby="tabbtn-sprint">
 
   <section class="console" aria-label="Controlos">
     <div class="crow">
@@ -395,9 +446,154 @@ noscript{display:block; padding:16px; background:var(--surface);
     <p>Fonte autoritativa: <a href="https://learning.sap.com/certifications" target="_blank" rel="noopener"><b>learning.sap.com/certifications</b></a>. Está no dia 28.</p>
   </section>
 
+  </div><!-- /tab-sprint -->
+
+  <div class="tabpanel hide" id="tab-mercado" role="tabpanel" aria-labelledby="tabbtn-mercado">
+
+  <section class="panel">
+    <h2>O número que se leva para a entrevista</h2>
+    <p>Não se entra numa chamada a descobrir o preço em direto. Os três valores a ter decorados — e todos são <strong>o que entra para si</strong>, não o que o cliente desembolsa:</p>
+    <div class="anchor-row">
+      <div class="anchor">
+        <span>Âncora defensável</span><b>900 €</b>
+        <i>por dia · igual ao onshore SAP &amp; ERP no DACH. Sustentado por estudo com metodologia.</i>
+      </div>
+      <div class="anchor">
+        <span>Teto de especialista</span><b>1.200 €</b>
+        <i>por dia · 150 €/h, sénior em projeto de transformação. Exige prova entregue.</i>
+      </div>
+      <div class="anchor">
+        <span>Chão — não descer</span><b>800 €</b>
+        <i>por dia · abaixo disto posiciona-o como nearshore, e é difícil de desfazer depois.</i>
+      </div>
+    </div>
+    <p><strong>Cotar o líquido que quer receber e deixar a margem por cima.</strong> É aqui que o preço nearshore se auto-inflige: o consultor já traz a cadeia descontada no número que diz. A margem do intermediário é ele que a tem de vender ao cliente — não é sua para absorver.</p>
+    <p>Se a resposta for <em>«não cabe no orçamento»</em>, a pergunta seguinte não é um número mais baixo — é <strong>quantas camadas há entre si e o cliente</strong>. O painel a seguir mostra porquê.</p>
+    <p>O DACH cota à <strong>hora</strong>, não ao dia — 41% factura em <code>Stundensatz</code> e só 12% em day rate. Levar os dois números: <strong>113 €/h ≈ 900 €/dia</strong>, a 8 horas.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Países — onshore local <em>vs</em> o que chega a Portugal</h2>
+    <p>Duas grandezas diferentes, que não se comparam na mesma coluna. <strong>Onshore local</strong> é o que um contratado do próprio país factura lá dentro. <strong>O que chega a Portugal</strong> é esse mesmo valor depois das camadas de intermediação — e recalcula em direto com as margens que definir no painel seguinte.</p>
+    <div class="tbl-wrap">
+      <table id="rateTbl">
+        <thead><tr><th>País</th><th>Onshore local €/dia</th><th>Via 1 camada</th><th>Via 2 camadas</th><th>Conf.</th></tr></thead>
+        <tbody>
+          <tr data-lo="912" data-hi="1288"><td>Dinamarca <i style="font-style:normal;color:var(--muted)">· SAP/ERP, inglês</i></td><td class="num">912–1.288</td><td class="num c1">—</td><td class="num c2">—</td><td><span class="dot md"></span>média</td></tr>
+          <tr data-lo="680" data-hi="1360"><td>Países Baixos <i style="font-style:normal;color:var(--muted)">· IT sénior</i></td><td class="num">680–1.360</td><td class="num c1">—</td><td class="num c2">—</td><td><span class="dot md"></span>média</td></tr>
+          <tr data-lo="624" data-hi="1248"><td>Noruega <i style="font-style:normal;color:var(--muted)">· IT sénior</i></td><td class="num">624–1.248</td><td class="num c1">—</td><td class="num c2">—</td><td><span class="dot md"></span>média</td></tr>
+          <tr data-lo="904" data-hi="904"><td><strong>Alemanha</strong> <i style="font-style:normal;color:var(--muted)">· média SAP &amp; ERP</i></td><td class="num"><strong>~904</strong></td><td class="num c1">—</td><td class="num c2">—</td><td><span class="dot hi"></span>alta</td></tr>
+          <tr data-lo="640" data-hi="1280"><td>Alemanha <i style="font-style:normal;color:var(--muted)">· IT sénior, sem recorte SAP</i></td><td class="num">640–1.280</td><td class="num c1">—</td><td class="num c2">—</td><td><span class="dot md"></span>média</td></tr>
+          <tr data-lo="545" data-hi="1015"><td>Suécia <i style="font-style:normal;color:var(--muted)">· IT sénior</i></td><td class="num">545–1.015</td><td class="num c1">—</td><td class="num c2">—</td><td><span class="dot md"></span>média</td></tr>
+          <tr class="hi"><td><strong>Portugal — o que se observa hoje</strong></td><td class="num">—</td><td class="num">—</td><td class="num"><b>350–600</b></td><td><span class="dot lo"></span>baixa</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Repare na última linha.</strong> Os €350–600 que se pagam em Portugal não estão numa coluna de mercado — caem exatamente na coluna de <em>duas camadas</em>. Não é coincidência: <strong>o preço nearshore não é um preço de mercado, é o preço onshore menos as camadas.</strong></p>
+    <p>Daí a Dinamarca ser a linha a vigiar: paga tão bem ou melhor que a Alemanha em SAP/ERP sénior e trabalha em inglês por omissão. Sobe o topo da cadeia sem exigir alemão.</p>
+    <p><span class="conf">confiança ·</span> a coluna de confiança aplica-se ao <strong>onshore</strong>. As duas colunas derivadas herdam essa incerteza e somam-lhe a do modelo de margens.</p>
+  </section>
+
+  <section class="panel flag">
+    <h2>A segunda consultoria — é ela que fabrica o preço nearshore</h2>
+    <p><strong>«Preço de Portugal» não existe como preço de mercado.</strong> O que existe é o orçamento do cliente final — alemão, dinamarquês, holandês — menos a margem de cada intermediário pelo caminho. O que sobra é que se chama nearshore.</p>
+    <p><code>cliente → você</code> é raro no início · <code>cliente → agência → você</code> é o padrão · <code>cliente → consultora principal → agência → você</code> acontece quando quem ganhou o contrato subcontrata.</p>
+    <p><strong>Duas camadas com margens normais comem cerca de um terço do orçamento.</strong> O mesmo projeto, o mesmo cliente, o mesmo trabalho — e um rate que parece mau sem que ninguém lhe tenha mentido. Ajuste as margens e veja (a tabela de países acima recalcula junto):</p>
+
+    <div class="calc">
+      <div class="field">
+        <label for="rAlvo">Alvo líquido €/dia</label>
+        <input type="number" id="rAlvo" value="900" min="0" step="50">
+      </div>
+      <div class="field">
+        <label for="rM1">Margem 1ª camada %</label>
+        <input type="number" id="rM1" value="20" min="0" max="90" step="1">
+      </div>
+      <div class="field">
+        <label for="rM2">Margem 2ª camada %</label>
+        <input type="number" id="rM2" value="15" min="0" max="90" step="1">
+      </div>
+      <div class="field">
+        <label for="rOrc">Orçamento do cliente €/dia</label>
+        <input type="number" id="rOrc" value="1200" min="0" step="50">
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Cadeia até ao cliente</th><th>Para eu receber o alvo, o cliente paga</th><th>Com o orçamento acima, chega-me</th></tr></thead>
+        <tbody>
+          <tr><td>Direto — sem intermediário</td><td class="num" id="oNeed0">—</td><td class="num" id="oGet0">—</td></tr>
+          <tr><td>1 camada — agência ou broker</td><td class="num" id="oNeed1">—</td><td class="num" id="oGet1">—</td></tr>
+          <tr class="hi"><td><strong>2 camadas — consultora + agência</strong></td><td class="num"><b id="oNeed2">—</b></td><td class="num"><b id="oGet2">—</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Com duas camadas perde <strong id="oPerda">—</strong> do que o cliente desembolsa. Para receber o mesmo, o cliente tem de ter orçamento para <strong id="oNeedTxt">—</strong> — e é aí que a candidatura morre por preço sem que o preço fosse o problema.</p>
+
+    <p><span class="conf">confiança média ·</span> as margens por camada são <strong>modelo, não medição</strong>. O que está verificado é que, para o mesmo perfil, a diferença entre canais chega a <strong>27–54 €/hora</strong>: consultora cobra +10 a +20% ao cliente, freelancer direto −10 a −20%. Os 20% e 15% por omissão são coerentes com isso, mas o empilhamento de duas camadas é estimativa. <strong>Substitua pelos números reais assim que os souber</strong> — e são pergunta legítima na chamada.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Duas alavancas — e a barata não é a óbvia</h2>
+    <p>Se o preço nearshore é o preço onshore menos as camadas, então há <strong>duas</strong> formas de o subir, e não uma:</p>
+    <p><strong>Trocar de mercado</strong> sobe o topo da cadeia. <strong>Encurtar a cadeia</strong> sobe a sua fatia dela. A tese do <code>README</code> só contempla a primeira — mas partindo da Alemanha, com as margens do painel anterior:</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Movimento</th><th>Chega-me</th><th>Ganho</th></tr></thead>
+        <tbody>
+          <tr><td>Hoje — Alemanha, por baixo de 2 camadas</td><td class="num" id="cxNow">—</td><td class="num">—</td></tr>
+          <tr><td>Trocar para a Dinamarca, mantendo as 2 camadas</td><td class="num" id="cxDk">—</td><td class="num" id="cxDkG">—</td></tr>
+          <tr><td>Ficar na Alemanha, cortar para <strong>1 camada</strong></td><td class="num" id="cx1">—</td><td class="num" id="cx1G">—</td></tr>
+          <tr class="hi"><td>Ficar na Alemanha, ir a <strong>direto</strong></td><td class="num"><b id="cx0">—</b></td><td class="num"><b id="cx0G">—</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Sem mudar de país, sem aprender alemão, sem mercado novo:</strong> tirar um intermediário do meio vale mais do que a maioria das trocas de mercado. E o mercado que já conhece é aquele onde tem 20 anos de referências.</p>
+    <p>O senão é real e já está medido noutro sítio desta aba: o cliente alemão prefere intermediário precisamente porque ele <strong>absorve o risco jurídico</strong> de contratar um independente lá fora. Ir a direto à primeira raramente resulta. O caminho que resulta é outro — <strong>entrar por agência, e comprimir a cadeia na renovação</strong>, quando já há relação, entregas feitas e o cliente tem mais a perder em trocá-lo do que em contratá-lo diretamente.</p>
+    <p>Por isso o sprint continua a valer: encurtar a cadeia só se negoceia de uma posição de prova entregue. <strong>Sem prova, é a cadeia que decide o seu preço; com prova, é você.</strong></p>
+  </section>
+
+  <section class="panel">
+    <h2>Guião — o que perguntar antes de dizer um número</h2>
+    <p>Uma única pergunta descodifica quase todas as propostas. Fazê-la antes de cotar, sempre:</p>
+    <ol class="ask">
+      <li><b>«Quantas camadas há entre mim e o cliente final?»</b> — sem isto, um rate não tem significado. 850 € direto e 850 € por baixo de duas consultoras são propostas completamente diferentes.</li>
+      <li><b>«Estão a contratar diretamente ou a subcontratar de outra consultora?»</b> — se for subcontratação, a margem já foi tirada duas vezes e há menos espaço para negociar.</li>
+      <li><b>«O valor que me indica é o que o cliente paga ou o que chega a mim?»</b> — a ambiguidade aqui é frequente e quase nunca é acidental.</li>
+      <li>Só depois: <b>cotar em €/h no DACH</b>, em €/dia nos nórdicos. Âncora 113 €/h · 900 €/dia.</li>
+    </ol>
+    <p>Dizer à cabeça, sem esperar pela objeção: <strong>remoto a partir de Portugal, empresa constituída, faturação B2B intracomunitária, já com histórico.</strong> O cliente alemão tem receio real de contratar independentes lá fora — <code>Scheinselbständigkeit</code> e <code>Betriebsstätte</code> — e é por isso que a agência existe. Resolvido logo no início, deixa de ser assunto a meio do processo.</p>
+    <p>E ter prontas <strong>duas referências de cliente</strong>: aparecem como requisito duro nos projetos longos.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Contexto — não sobrestimar a maré</h2>
+    <p>O mercado freelance DACH arrefeceu em 2026, e convém saber disso antes de pedir 1.400 €:</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Indicador</th><th>2026</th></tr></thead>
+        <tbody>
+          <tr><td>Stundensatz médio — <strong>primeira descida da série</strong></td><td class="num">104 € → 103 €</td></tr>
+          <tr><td>Sem ocupação garantida para os meses seguintes</td><td class="num">43%</td></tr>
+          <tr><td>Carteira pior que no ano anterior</td><td class="num">49%</td></tr>
+          <tr><td>Candidaturas por projeto</td><td class="num">~11</td></tr>
+          <tr><td>Já sofreram ghosting</td><td class="num">84%</td></tr>
+          <tr><td><strong>SAP &amp; ERP — posição no ranking de rate</strong></td><td class="num"><b>2.º de 10</b></td></tr>
+          <tr><td><strong>SAP &amp; ERP — satisfação com o rendimento</strong></td><td class="num"><b>71%</b>, a mais alta</td></tr>
+          <tr><td>Projetos de 6 a 9 meses / acima de 12 meses</td><td class="num">55% / 45%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Não é maré alta, é maré seletiva.</strong> O mercado geral encolhe e SAP resiste — o que torna a especialização mais valiosa e o generalista SAP mais vulnerável do que era há dois anos. Silêncio depois de uma candidatura é o comportamento normal deste mercado, não sinal sobre si.</p>
+    <p>Fonte principal: <a href="https://www.freelancermap.de/files/survey/freelancer-kompass-2026.pdf" target="_blank" rel="noopener"><b>Freelancer-Kompass 2026</b></a> — 5.412 respostas e 340.000 perfis do espaço DACH. Nórdicos e diferença entre canais: <a href="https://www.finditconsultants.com/en/markedsdata" target="_blank" rel="noopener"><b>FindITconsultants</b></a>. Detalhe, agências e registo de vagas em <code>Mercado/</code>.</p>
+  </section>
+
+  </div><!-- /tab-mercado -->
+
   <footer>
     Progresso guardado só neste browser, nesta máquina. Nada sai daqui.<br>
-    Sprint de reposicionamento SAP · HANA Cloud → Datasphere → SAC
+    Raciocínio completo em <code>Estudos/TRILHA.md</code> · CV em <code>CV/Jefferson_Santos_CV_2026_rev1.docx</code>
   </footer>
 </div>
 
@@ -729,6 +925,100 @@ document.getElementById("fReset").addEventListener("click",function(){
   if(!confirm("Zerar o progresso dos 28 dias?")) return;
   state={}; save(); paint();
 });
+
+/* ---------------- tabs ---------------- */
+var TKEY="vidasap.tab";
+var tabBtns=[].slice.call(document.querySelectorAll(".tab"));
+function showTab(id,store){
+  tabBtns.forEach(function(t){
+    var on=t.getAttribute("data-tab")===id;
+    t.setAttribute("aria-selected",String(on));
+    t.tabIndex=on?0:-1;
+    var p=document.getElementById("tab-"+t.getAttribute("data-tab"));
+    if(p) p.classList.toggle("hide",!on);
+  });
+  if(store){ try{ localStorage.setItem(TKEY,id); }catch(e){} }
+}
+tabBtns.forEach(function(t,i){
+  t.addEventListener("click",function(){ showTab(t.getAttribute("data-tab"),true); });
+  t.addEventListener("keydown",function(e){
+    var d=e.key==="ArrowRight"?1:e.key==="ArrowLeft"?-1:0;
+    if(!d) return;
+    e.preventDefault();
+    var nx=tabBtns[(i+d+tabBtns.length)%tabBtns.length];
+    nx.focus(); showTab(nx.getAttribute("data-tab"),true);
+  });
+});
+var savedTab=null;
+try{ savedTab=localStorage.getItem(TKEY); }catch(e){}
+showTab(savedTab==="mercado"?"mercado":"sprint",false);
+
+/* ---------------- rate cascade ---------------- */
+(function(){
+  var alvoEl=document.getElementById("rAlvo"), m1El=document.getElementById("rM1"),
+      m2El=document.getElementById("rM2"), orcEl=document.getElementById("rOrc");
+  if(!alvoEl) return;
+
+  function fmt(n){
+    if(!isFinite(n)||n<0) n=0;
+    return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,".");
+  }
+  function eur(n){ return "€"+fmt(n); }
+  function rng(a,b){
+    return Math.round(a)===Math.round(b) ? "€"+fmt(a) : "€"+fmt(a)+"–"+fmt(b);
+  }
+  function gain(a,b,base){
+    if(base<=0) return "—";
+    var g1=Math.round((a/base-1)*100), g2=Math.round((b/base-1)*100);
+    function s(v){ return (v>0?"+":"")+v+"%"; }
+    return g1===g2 ? s(g1) : s(g1)+" a "+s(g2);
+  }
+  function put(id,txt){ var e=document.getElementById(id); if(e) e.textContent=txt; }
+  function pct(el){
+    var v=parseFloat(el.value);
+    if(!isFinite(v)) v=0;
+    return Math.min(Math.max(v,0),90)/100;
+  }
+  function calc(){
+    var alvo=Math.max(parseFloat(alvoEl.value)||0,0),
+        orc =Math.max(parseFloat(orcEl.value)||0,0),
+        m1=pct(m1El), m2=pct(m2El);
+
+    var need1=alvo/(1-m1), need2=need1/(1-m2);
+    put("oNeed0",eur(alvo));  put("oNeed1",eur(need1));  put("oNeed2",eur(need2));
+
+    var get1=orc*(1-m1), get2=get1*(1-m2);
+    put("oGet0",eur(orc));   put("oGet1",eur(get1));    put("oGet2",eur(get2));
+
+    put("oPerda",Math.round((1-(1-m1)*(1-m2))*100)+"%");
+    put("oNeedTxt",eur(need2)+"/dia");
+
+    /* tabela de países: onshore → o que chega via 1 e 2 camadas */
+    [].forEach.call(document.querySelectorAll("#rateTbl tr[data-lo]"),function(tr){
+      var lo=parseFloat(tr.getAttribute("data-lo"))||0,
+          hi=parseFloat(tr.getAttribute("data-hi"))||lo,
+          c1=tr.querySelector(".c1"), c2=tr.querySelector(".c2");
+      if(c1) c1.textContent=rng(lo*(1-m1), hi*(1-m1));
+      if(c2) c2.textContent=rng(lo*(1-m1)*(1-m2), hi*(1-m1)*(1-m2));
+    });
+
+    /* duas alavancas: trocar de mercado vs encurtar a cadeia (base: Alemanha 904) */
+    var DE=904, DKlo=912, DKhi=1288, chain=(1-m1)*(1-m2);
+    var now=DE*chain;
+    put("cxNow",eur(now));
+    put("cxDk", rng(DKlo*chain, DKhi*chain));
+    put("cxDkG",gain(DKlo*chain, DKhi*chain, now));
+    put("cx1",  eur(DE*(1-m1)));
+    put("cx1G", gain(DE*(1-m1), DE*(1-m1), now));
+    put("cx0",  eur(DE));
+    put("cx0G", gain(DE, DE, now));
+  }
+  [alvoEl,m1El,m2El,orcEl].forEach(function(el){
+    el.addEventListener("input",calc);
+    el.addEventListener("change",calc);
+  });
+  calc();
+})();
 
 tick(); paint();
 })();
