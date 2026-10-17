@@ -30,6 +30,23 @@ oficiais gratuitos da SAP, tutoriais hands-on e vídeos.
 Os números de rate são referências de estudos públicos, e o modelo de margens está
 explicitamente assinalado na própria página como estimativa, não como medição.
 
+## Aba Candidaturas + career-ops
+
+A fila de vagas desta aba liga-se ao [career-ops](https://github.com/career-ops-hq/career-ops),
+instalado localmente em `..\career-ops` (fora deste repositório: o CV e os relatórios
+nunca são publicados).
+
+```
+cd ..\career-ops
+node sync-portal.mjs --import   # fila do portal -> data/pipeline.md (só anúncios diretos, sem duplicados)
+claude                          # depois: /career-ops pipeline  (avalia, gera CV e carta)
+node sync-portal.mjs            # nota + estado de volta para a aba (bloco careerOpsData no index.html)
+```
+
+O botão **Exportar fila para career-ops** na aba faz o mesmo que o `--import`, mas pela
+área de transferência. Uma vaga com estado `Applied` (ou mais adiante) no career-ops passa
+para *Submetidas*. Só a nota, o estado, a data e se há CV gerado chegam à página.
+
 ---
 
 Página única, sem dependências externas. Funciona offline depois de carregada.
